@@ -16,7 +16,7 @@ Page({
    */
   onLoad: function (options) {
     let tipID = options.tipID;
-    let tableID = app.globalData.tableID;
+    let tableID = app.globalData.tableID.tips;
     let tip = new wx.BaaS.TableObject(tableID);
     let that = this;
     wx.showLoading({
@@ -44,7 +44,7 @@ Page({
     })
   },
   participateTask: function (e) {
-    let tableID = app.globalData.tableID;
+    let tableID = app.globalData.tableID.tips;
     let that = this;
     let tip = new wx.BaaS.TableObject(tableID);
     wx.showLoading({
@@ -65,33 +65,33 @@ Page({
         let tipRecord = tip.getWithoutData(tipItem.id);
         tipRecord.set('participantID', participants);
         tipRecord.update().then(function (currentRes) {
-          console.log(currentRes);
           let tempTaskList = new wx.BaaS.TableObject('38593');
           let query = new wx.BaaS.Query();
           query.compare('created_by', '=', uid);
           tempTaskList.setQuery(query).find().then(function (taskListRes) {
-            console.log(typeof currentRes.data.id);
-            let myTaskList = new wx.BaaS.TableObject('38593');
+            let myTaskList = new wx.BaaS.TableObject(app.globalData.tableID.userTaskList);
             if (taskListRes.data.objects.length == 0) {
-              console.log('yes');
               let taskListRecord = myTaskList.create();
               taskListRecord.set({
                 myTaskList: [currentRes.data.id]
-              }).save().then(function(saveRes){
+              }).save().then(function (saveRes) {
                 console.log(saveRes);
-              }, function(saveErr){
+              }, function (saveErr) {
                 console.log(saveErr);
               })
-              
+
             } else {
-              console.log('no');
               let taskList = taskListRes.data.objects[0].myTaskList;
               taskList.push(currentRes.data.id);
-              let taskListRecord = myTaskList.getWithouData(taskListRes.data.objects[0].id);
+              let taskListRecord = myTaskList.getWithoutData(taskListRes.data.objects[0].id);
               taskListRecord.set({
                 myTaskList: taskList
               });
-              taskListRecord.update();
+              taskListRecord.update().then(function (res) {
+                console.log(res);
+              }, function (err) {
+                console.log(err);
+              })
             }
 
           }, function (err) {
