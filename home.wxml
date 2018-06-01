@@ -1,0 +1,25 @@
+<view class='container'>
+  <view class="swiper-tab">
+    <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">附近的tips</view>
+    <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">我的关注</view>
+    <view class="tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">随机推荐</view>
+  </view>
+
+  <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange">
+    <swiper-item>
+      <block wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index">
+        <view class='tipContainer' bindtap='showDetail' data-tip='{{item}}'>
+          <text class='tipType'>tip种类：{{item.tipType}} </text>
+          <text class='tipContent'>tip内容：{{item.content}}</text>
+          <button class='followBtn' catchtap='catchFollow' data-tip='{{item}}' >关注</button>
+        </view>
+      </block>
+    </swiper-item>
+    <swiper-item>
+      <view class='tipContainer'>我的关注</view>
+    </swiper-item>
+    <swiper-item>
+      <view class='tipContainer'>随机推荐</view>
+    </swiper-item>
+  </swiper>
+</view>
