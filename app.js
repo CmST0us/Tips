@@ -2,7 +2,8 @@ App({
   globalData:{
     tableID: {
       tips: '37869',
-      userTaskList: '38593'
+      userTaskList: '38593',
+      follow: '38936'
     },
     tipsData:[],
     currentTaskTipID: '',

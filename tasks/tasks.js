@@ -33,9 +33,11 @@ Page({
    */
   onShow: function () {
     let tableID = app.globalData.tableID.tips;
+    let uid = wx.BaaS.storage.get('uid');
     let query = new wx.BaaS.Query();
     let that = this;
     query.compare('isVerified', '=', false);
+    query.compare('created_by', '=', uid);
     let tips = new wx.BaaS.TableObject(tableID);
     wx.showLoading({
       title: '加载未验证tips',
