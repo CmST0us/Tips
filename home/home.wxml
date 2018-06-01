@@ -11,6 +11,7 @@
         <view class='tipContainer' bindtap='showDetail' data-tip='{{item}}'>
           <text class='tipType'>tip种类：{{item.tipType}} </text>
           <text class='tipContent'>tip内容：{{item.content}}</text>
+          <button class='followBtn' catchtap='catchFollow' data-tip='{{item}}' >关注</button>
         </view>
       </block>
     </swiper-item>
