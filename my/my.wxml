@@ -6,8 +6,8 @@
   </view>
   <view class='my_task_list_section'>
     <text class='my_task_list_title'>我的任务列表</text>
-    <view class='my_task_list_row'>
-      <text wx:for='{{myTaskList}}'>{{index}}. 类型:{{item.tipType}}, 内容: {{item.content}}, 是否校验:{{item.isVerified}}</text>
+    <view class='my_task_list_row' wx:for='{{myTaskList}}'>
+      <text>{{index}}. 类型:{{item.tipType}}, 内容: {{item.content}}, 是否校验:{{item.isVerified}}</text>
     </view>
     <!-- <text class='myTaskList' bindtap='showMyTaskList'>我的任务列表</text> -->
   </view>
