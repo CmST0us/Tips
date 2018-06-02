@@ -8,6 +8,9 @@ Page({
   data: {
     tipsData:[]
   },
+  // 分页
+  currentPage: 0,
+  rowPerPage: 20,
 
   /**
    * 生命周期函数--监听页面加载
@@ -37,7 +40,6 @@ Page({
     let query = new wx.BaaS.Query();
     let that = this;
     query.compare('isVerified', '=', false);
-    query.compare('created_by', '=', uid);
     let tips = new wx.BaaS.TableObject(tableID);
     wx.showLoading({
       title: '加载未验证tips',

@@ -3,6 +3,7 @@
 .container {  
   margin-left: 10rpx;  
   margin-right: 10rpx;  
+  width: 100%;  
 }  
   
 .swiper-tab {  

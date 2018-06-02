@@ -10,13 +10,17 @@ Page({
     tipData: [],
     currentTab: 0
   },
-
+  // 分页
+  currentPage: 0,
+  rowPerPage: 20,
+  hasNext: true,
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.fetchTipsAndShow();
   },
+
   swichNav: function (e) {
     var that = this;
     if (this.data.currentTab === e.target.dataset.current) {
@@ -51,6 +55,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log("onShow");
+  },
+
+  fetchTipsAndShow: function () {
     var that = this;
     let tableID = app.globalData.tableID.tips;
     wx.getLocation({
@@ -59,12 +67,18 @@ Page({
         let longitude = res.longitude;
         let latitude = res.latitude;
         let currentPoint = new wx.BaaS.GeoPoint(longitude, latitude);
-        let tip = new wx.BaaS.TableObject(tableID);
         let query = new wx.BaaS.Query();
         query.withinCircle('position', currentPoint, 2);
-        tip.setQuery(query).find().then(function (res) {
-          console.log(res.data);
-          that.setData({ tipData: res.data.objects });
+        let tip = that.createTipsTableObject(tableID, query, that.currentPage);
+        tip.find().then(function (res) {
+          if (res.data.meta.next == null) {
+            that.hasNext = false;
+          } else {
+            that.hasNext = true;
+          }
+          var tipData = that.data.tipData;
+          var concatData = tipData.concat(res.data.objects);
+          that.setData({ tipData: concatData});
         }, function (err) {
           console.log(err);
           wx.showToast({
@@ -123,6 +137,23 @@ Page({
     })
   },
 
+  // 创建TableObject对象
+  // id: table ID
+  // query: wx.BaaS.Query 对象
+  // pageNum: 请求的页面
+  createTipsTableObject: function (tableId, query, pageNum) {
+    if (pageNum == undefined) {
+      pageNum = 0;
+    }
+    if (query == undefined) {
+        query = new wx.BaaS.Query();
+    }
+    let limit = this.rowPerPage;
+    let offset = pageNum * limit;
+    let tipObejct = new wx.BaaS.TableObject(tableId);
+    tipObejct.setQuery(query).limit(limit).offset(offset);
+    return tipObejct;
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -141,14 +172,20 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.currentPage = 0;
+    
+    this.data.tipData = [];
+    this.fetchTipsAndShow();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if (this.hasNext == true) {
+      this.currentPage += 1;
+      this.fetchTipsAndShow();
+    }
   },
 
   /**

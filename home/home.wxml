@@ -7,13 +7,13 @@
 
   <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange">
     <swiper-item>
-      <block wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index">
-        <view class='tipContainer' bindtap='showDetail' data-tip='{{item}}'>
-          <text class='tipType'>tip种类：{{item.tipType}} </text>
-          <text class='tipContent'>tip内容：{{item.content}}</text>
-          <button class='followBtn' catchtap='catchFollow' data-tip='{{item}}' >关注</button>
-        </view>
-      </block>
+        <block wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index" wx:key="id">
+          <view class='tipContainer' bindtap='showDetail'>
+            <text class='tipType'>{{index}}tip种类：{{item.tipType}} </text>
+            <text class='tipContent'>tip内容：{{item.content}}</text>
+            <button class='followBtn' catchtap='catchFollow' data-tip='{{item}}' >关注</button>
+          </view>
+        </block>
     </swiper-item>
     <swiper-item>
       <view class='tipContainer'>我的关注</view>
