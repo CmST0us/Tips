@@ -1,6 +1,6 @@
-<block wx:for="{{tipsData}}" wx:for-item="item" wx:for-index="index">
-  <view class="container" bindtap='showTaskDetail' data-tip='{{item.id}}'>
-    <text class='tipTyps'>{{item.tipType}}</text>
+<block wx:for="{{tipsData}}" wx:for-item="item" wx:for-index="index" wx:key="id">
+  <view class="container task-list-row" bindtap='showTaskDetail' data-tip='{{item.id}}'>
+    <text class='tipTyps'>{{index}}: {{item.tipType}}</text>
     <text class='tipContent'>{{item.content}}</text>
   </view>
 </block>

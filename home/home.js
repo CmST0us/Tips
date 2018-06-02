@@ -70,7 +70,7 @@ Page({
         let currentPoint = new wx.BaaS.GeoPoint(longitude, latitude);
         let query = new wx.BaaS.Query();
         query.withinCircle('position', currentPoint, 2);
-        let tip = that.createTipsTableObject(tableID, query, that.currentPage);
+        let tip = that.createTableObject(tableID, query, that.currentPage);
         tip.find().then(function (res) {
           if (res.data.meta.next == null) {
             that.hasNext = false;
@@ -142,7 +142,7 @@ Page({
   // id: table ID
   // query: wx.BaaS.Query 对象
   // pageNum: 请求的页面
-  createTipsTableObject: function (tableId, query, pageNum) {
+  createTableObject: function (tableId, query, pageNum) {
     if (pageNum == undefined) {
       pageNum = 0;
     }
