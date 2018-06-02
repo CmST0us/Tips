@@ -106,6 +106,10 @@ Page({
         followRecord.set({
           myFollowTips: [tip.id]
         }).save().then(function (saveRes) {
+          wx.showToast({
+            title: '关注成功',
+            image: '../image/follow.png'
+          })
           console.log(saveRes);
         }, function (saveErr) {
           console.log(saveErr);
@@ -127,6 +131,10 @@ Page({
             myFollowTips: followList
           });
           followRecord.update().then(function (res) {
+            wx.showToast({
+              title: '关注成功',
+              image: '../image/follow.png'
+            })
             console.log(res);
           }, function (err) {
             console.log(err);
