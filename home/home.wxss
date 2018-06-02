@@ -25,7 +25,6 @@ swiper-item{
 }
 
 .swiper {  
-  height: 1100px;  
   background: #dfdfdf;  
 }  
   

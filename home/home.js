@@ -8,7 +8,8 @@ Page({
    */
   data: {
     tipData: [],
-    currentTab: 0
+    currentTab: 0,
+    listRowHeight: 75
   },
   // 分页
   currentPage: 0,
