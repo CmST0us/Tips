@@ -4,4 +4,5 @@
   <text class='locationName'>地名：{{tipData.locationName}}</text>
   <map id='map' latitude='{{tipData.position.coordinates[1]}}' longitude='{{tipData.position.coordinates[0]}}' scale='16' show-location='{{true}}'></map>
   <text class='locationAddress'>位置：{{tipData.locationAddress}}</text>
+  <button class='followBtn' bindtap='bindFollow'>{{btnWord}}</button>
 </view>
