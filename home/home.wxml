@@ -8,7 +8,7 @@
   <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{tipData.length * listRowHeight + 46}}px'>
     <swiper-item>
       <block wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index" wx:key="id">
-        <view class='tipContainer' bindtap='showDetail'>
+        <view class='tipContainer' bindtap='showDetail' data-tip='{{item}}'>
           <text class='tipType'>{{index}}tip种类：{{item.tipType}} </text>
           <text class='tipContent'>tip内容：{{item.content}}</text>
           <button class='followBtn' catchtap='catchFollow' data-tip='{{item}}' >关注</button>
