@@ -60,6 +60,10 @@ Page({
           let followRecord = followTableObject.getWithoutData(res.data.objects[0].id);
           followRecord.set({ myFollowTips: followTipsArr });
           followRecord.update().then(function (saveRes) {
+            wx.showToast({
+              title: '关注成功',
+              image: '../image/follow.png'
+            })
             console.log(saveRes);
           }, function (saveErr) {
             console.log(saveErr);
@@ -78,6 +82,10 @@ Page({
           let followRecord = followTableObject.getWithoutData(res.data.objects[0].id);
           followRecord.set({ myFollowTips: followTipsArr });
           followRecord.update().then(function (saveRes) {
+            wx.showToast({
+              title: '取消关注成功',
+              image: '../image/unfollow.png'
+            })
             console.log(saveRes);
           }, function (saveErr) {
             console.log(saveErr);
