@@ -3,7 +3,8 @@ App({
     tableID: {
       tips: '37869',
       userTaskList: '38593',
-      follow: '38936'
+      follow: '38936',
+      isVerified: '39061'
     },
     tipsData:[],
     currentTaskTipID: '',
