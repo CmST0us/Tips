@@ -5,19 +5,27 @@
     <view class="tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">随机推荐</view>
   </view>
 
-  <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{tipData.length * listRowHeight + 46}}px'>
+  <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{(currentTab==0 ? tipData.length : myFollowData.length) * listRowHeight + 46}}px'>
+
     <swiper-item>
       <block wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index" wx:key="id">
-        <view class='tipContainer' bindtap='showDetail' data-tip='{{item}}'>
+        <view class='tipContainer' bindtap='showDetail' data-tip='{{item}}'style="height:{{listRowHeight}}px">
           <text class='tipType'>{{index}}tip种类：{{item.tipType}} </text>
           <text class='tipContent'>tip内容：{{item.content}}</text>
           <button class='followBtn' catchtap='catchFollow' data-tip='{{item}}' >关注</button>
         </view>
       </block>
     </swiper-item>
+
     <swiper-item>
-      <view class='tipContainer'>我的关注</view>
+      <block wx:for="{{myFollowData}}" wx:for-item="item" wx:for-index="index" wx:key="id">
+        <view class='follow-row' bindtap='showDetail' data-tip='{{item}}' style="height:{{listRowHeight}}px">
+          <text class='tipType'>{{index}}tip种类：{{item.tipType}} </text>
+          <text class='tipContent'>tip内容：{{item.content}}</text>
+        </view>
+      </block>
     </swiper-item>
+
     <swiper-item>
       <view class='tipContainer'>随机推荐</view>
     </swiper-item>

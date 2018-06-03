@@ -8,6 +8,7 @@ Page({
    */
   data: {
     tipData: [],
+    myFollowData: [],
     currentTab: 0,
     listRowHeight: 75
   },
@@ -15,6 +16,12 @@ Page({
   currentPage: 0,
   rowPerPage: 20,
   hasNext: true,
+
+  // 我的关注分页
+  myFollowCurrentPage: 0,
+  myFollowHasNext: true,
+  myFollowIds: [],
+  myFollowHasLoad: false,
   /**
    * 生命周期函数--监听页面加载
    */
@@ -32,11 +39,23 @@ Page({
       })
     }
   },
+
   swiperChange: function (e) {
+    let currentTabIndex = e.detail.current;
+
+    if (currentTabIndex == 1) {
+      if (this.myFollowHasLoad == false) {
+        this.onMyFollowTipTabLoad();
+        this.myFollowHasLoad = true;
+      }
+      this.onMyFollowTipTabShow();
+    }
+
     this.setData({
-      currentTab: e.detail.current,
+      currentTab: currentTabIndex,
     })
   },
+
   showDetail: function (e) {
     console.log(e.currentTarget.dataset.tip);
     app.globalData.currentTip = e.currentTarget.dataset.tip;
@@ -57,6 +76,66 @@ Page({
    */
   onShow: function () {
     console.log("onShow");
+  },
+
+  onMyFollowTipTabShow: function () {
+    console.log("myFollowTipTabShow")
+  },
+  onMyFollowTipTabLoad: function () {
+    this.fetchMyFollowIds(
+      this.fetchMyFollowDataAtCurrentPageAndRender
+    );
+  },
+
+  // f: 取回成功的回调,可为空
+  fetchMyFollowIds: function (f) {
+    let that = this;
+    let uid = wx.BaaS.storage.get('uid');
+    let followTableId = app.globalData.tableID.follow;
+    let tipTableId = app.globalData.tableID.tips;
+    let query = new wx.BaaS.Query();
+    query.compare("created_by", '=', uid);
+
+    let followIdTableObject = this.createTableObject(followTableId, query, 0);
+    wx.showLoading({
+      title: '加载中',
+    });
+
+    followIdTableObject.find().then(res => {
+      that.myFollowIds = res.data.objects[0].myFollowTips;
+      if (f != undefined) {
+        f();
+      }
+      wx.hideLoading();
+    }, err => {
+      wx.hideLoading();
+      console.log(err);
+    });
+
+  },
+
+  fetchMyFollowDataAtCurrentPageAndRender: function () {
+    let that = this;
+    let followTips = that.myFollowIds;
+    let tipsTableId = app.globalData.tableID.tips;
+    let tipQuery = new wx.BaaS.Query();
+    tipQuery.in('id', followTips);
+
+    let tipTableObject = that.createTableObject(tipsTableId, tipQuery, that.myFollowCurrentPage);
+    tipTableObject.find().then(res => {
+      if (res.data.meta.next == null) {
+        that.myFollowHasNext = false;
+      } else {
+        that.myFollowHasNext = true;
+      }
+
+      let myFollow = that.data.myFollowData.concat(res.data.objects)
+      that.setData({ myFollowData: myFollow });
+
+    }, err => {
+      console.log(err);
+    });
+
   },
 
   fetchTipsAndShow: function () {
@@ -181,20 +260,38 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.currentPage = 0;
+    if (this.data.currentTab == 0) {
+      this.currentPage = 0;
+
+      this.data.tipData = [];
+      this.fetchTipsAndShow();
+    } else if (this.data.currentTab == 1) {
+      this.myFollowCurrentPage = 0;
+      this.myFollowIds = [];
+      this.data.myFollowData = [];
+      this.fetchMyFollowIds(
+        this.fetchMyFollowDataAtCurrentPageAndRender
+      )
+    }
     
-    this.data.tipData = [];
-    this.fetchTipsAndShow();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if (this.hasNext == true) {
-      this.currentPage += 1;
-      this.fetchTipsAndShow();
+    if (this.data.currentTab == 0) {
+      if (this.hasNext == true) {
+        this.currentPage += 1;
+        this.fetchTipsAndShow();
+      }
+    } else if (this.data.currentTab == 1) {
+      if (this.myFollowHasNext == true) {
+        this.myFollowCurrentPage += 1;
+        this.fetchMyFollowDataAtCurrentPageAndRender();
+      }
     }
+    
   },
 
   /**
