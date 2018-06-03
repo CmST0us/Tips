@@ -1,4 +1,5 @@
 // my/my.js
+let app = getApp();
 Page({
 
   /**
@@ -132,6 +133,14 @@ Page({
     let tipObejct = new wx.BaaS.TableObject(tableId);
     tipObejct.setQuery(query).limit(limit).offset(offset);
     return tipObejct;
+  },
+  showDetail: function(e){
+    console.log(e.currentTarget.dataset.tip);
+    app.globalData.currentTip = e.currentTarget.dataset.tip;
+    wx.navigateTo({
+      url: '../detail/detail?page=' + 'my',
+    });
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
