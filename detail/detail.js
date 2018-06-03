@@ -8,7 +8,10 @@ Page({
   data: {
     tipData: {},
     btnWord: '关注',
-    isFollowed: false
+    isFollowed: false,
+    isFromMy: false,
+    isVerified: false,
+    checkBtnWord: '验证通过'
   },
 
   /**
@@ -17,10 +20,31 @@ Page({
   onLoad: function (options) {
     wx.showLoading({
       title: '正在加载',
-    })
-    let that = this;
-    let uid = wx.BaaS.storage.get('uid');
+    });
     let tip = app.globalData.currentTip;
+    let uid = wx.BaaS.storage.get('uid');
+    let that = this;
+    if (options.page == 'my') {
+      this.setData({
+        isFromMy: true
+      });
+      let verifiedTableObject = new wx.BaaS.TableObject(app.globalData.tableID.isVerified);
+      let query = new wx.BaaS.Query();
+      query.compare('created_by', '=', uid);
+      verifiedTableObject.setQuery(query).find().then(function (res) {
+        if (res.data.objects.length != 0 && res.data.objects[0].verifiedTips.indexOf(tip.id) != -1) {
+          that.setData({
+            isVerified: true,
+            checkBtnWord: '您已验证'
+          });
+        }
+      }, function (err) {
+        wx.showToast({
+          title: '网络故障',
+          image: '../image/netError.png'
+        });
+      })
+    }
     that.setData({ tipData: tip });
     let followTableObject = new wx.BaaS.TableObject(app.globalData.tableID.follow);
     let followQuery = new wx.BaaS.Query();
@@ -44,6 +68,81 @@ Page({
       });
     })
   },
+  bindCheck: function (e) {
+    wx.showLoading({
+      title: '正在提交',
+    });
+    let that = this;
+    let uid = wx.BaaS.storage.get('uid');
+    let tip = app.globalData.currentTip;
+    let tipTableObject = new wx.BaaS.TableObject(app.globalData.tableID.tips);
+    tipTableObject.get(tip.id).then(function (res) {
+      console.log(res);
+      let verifyNum = res.data.verifyNum + 1;
+      let tipRecord = tipTableObject.getWithoutData(tip.id);
+      tipRecord.set({
+        verifyNum: verifyNum,
+        isVerified: verifyNum == 10 ? true : false
+      });
+      tipRecord.update().then(function (saveRes) {
+        wx.showToast({
+          title: '验证成功',
+          image: '../image/success.png'
+        });
+        let verifiedTableObject = new wx.BaaS.TableObject(app.globalData.tableID.isVerified);
+        let query = new wx.BaaS.Query();
+        query.compare('created_by', '=', uid);
+        verifiedTableObject.setQuery(query).find().then(function (res) {
+          if (res.data.objects.length != 0) {
+            let verifiedTipsArr = res.data.objects[0].verifiedTips;
+            verifiedTipsArr.push(tip.id);
+            let verifiedTipsRec = verifiedTableObject.getWithoutData(res.data.objects[0].id);
+            verifiedTipsRec.set({ verifiedTips: verifiedTipsArr });
+            verifiedTipsRec.update().then(function (saveRes) {
+              console.log(saveRes);
+            }, function (saveErr) {
+              wx.showToast({
+                title: '网络故障',
+                image: '../image/netError.png'
+              });
+            })
+          } else {
+            let verifiedTipsRec = verifiedTableObject.create();
+            verifiedTipsRec.set({ verifiedTips: [tip.id]});
+            verifiedTipsRec.save().then(function(res){
+              console.log(res);
+            }, function(err){
+              wx.showToast({
+                title: '网络故障',
+                image: '../image/netError.png'
+              });
+            })
+          }
+          that.setData({
+            isVerified: true,
+            checkBtnWord: '您已验证'
+          });
+        }, function (err) {
+          wx.showToast({
+            title: '网络故障',
+            image: '../image/netError.png'
+          });
+        })
+        
+      }, function (saveErr) {
+        wx.showToast({
+          title: '网络故障',
+          image: '../image/netError.png'
+        });
+      })
+    }, function (err) {
+      wx.showToast({
+        title: '网络故障',
+        image: '../image/netError.png'
+      });
+    })
+  },
+
   bindFollow: function (e) {
     let that = this;
     let tip = app.globalData.currentTip;
