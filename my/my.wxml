@@ -4,13 +4,6 @@
     <image class='avatarImg' src='{{userInfo.avatarUrl}}'></image>
     <text class='userName'>{{userInfo.nickName}}</text>
   </view>
-  <view class='my-task-list-section'>
-    <text class='my-task-list-title'>我的任务列表</text>
-    <block wx:for='{{myTaskList}}' wx:for-index='index'>
-      <view class='my-task-list-row' bindtap='showDetail' data-tip='{{item}}'>
-        <text>{{index}}. 类型:{{item.tipType}}, 内容: {{item.content}}, 是否校验:{{item.isVerified}}</text>
-      </view>
-    </block>
-    <!-- <text class='myTaskList' bindtap='showMyTaskList'>我的任务列表</text> -->
-  </view>
+  <text class='myTaskList' bindtap='showMyTaskList' data-listtype='myTasksList'>我的任务列表</text>
+  <text class='myTaskList' bindtap='showMyTipsList' data-listtype='tipsList'>我的tips列表</text>
 </view>
