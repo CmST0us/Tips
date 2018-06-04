@@ -11,7 +11,7 @@ Page({
     myFollowData: [],
     recommendTipData: [],
     currentTab: 0,
-    listRowHeight: 75,
+    listRowHeight: 150,
     swiperHeight: 0
   },
   // 分页

@@ -9,10 +9,22 @@
 
     <swiper-item>
       <block wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index" wx:key="id">
-        <view class='tipContainer' bindtap='showDetail' data-tip='{{item}}'style="height:{{listRowHeight}}px">
-          <text class='tipType'>{{index}}tip种类：{{item.tipType}} </text>
-          <text class='tipContent'>tip内容：{{item.content}}</text>
+        <view class='tip-row' bindtap='showDetail' data-tip='{{item}}' style="height:{{listRowHeight}}px">
+          
+          <view class='tip-row-1'>
+            <text class='tip-title'>{{item.tipType}} </text>
+            <text class='tip-time'>1-1 12:00</text>
+          </view>
+          <view class='tip-row-2'>
+            <text class='tip-content'>{{item.content}}</text>
+          </view>
+          <view class="tip-row-3">
+            <text class='tip-verify'>未验证</text>
+          <text class='tip-location'>广东省广州市</text>
+          </view>
+          
           <button class='followBtn' catchtap='catchFollow' data-tip='{{item}}' >关注</button>
+
         </view>
       </block>
     </swiper-item>

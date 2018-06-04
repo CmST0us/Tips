@@ -1,8 +1,8 @@
 
  
 .container {  
-  margin-left: 10rpx;  
-  margin-right: 10rpx;  
+  /* margin-left: 10rpx;   */
+  /* margin-right: 10rpx;   */
   width: 100%;  
 }  
   
@@ -17,18 +17,82 @@
   width: 33.3%;  
   text-align: center;  
   font-size: 15px;  
-  color: #777;  
+  color: #777;   
 }  
-  
-swiper-item{
-  background-color: white;
-}
 
 .swiper {  
-  background: #dfdfdf;  
+  background: #f8f8f8;  
 }  
   
 .on {  
   color: blue;  
   border-bottom: 5rpx solid blue;  
 } 
+
+/*Row Cell Style  */
+
+.tip-row {
+  background-color: white;
+  margin-bottom: 4px;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 12px;
+  padding-top: 12px;
+  padding-right: 12px;
+  border-top: 1rpx solid #ededed;
+  border-bottom: 1rpx solid #ededed;
+}
+
+.tip-title {
+  font-size: 20px;
+  font-weight: bold;
+  width: 75%;
+}
+
+.tip-time {
+  font-size: 12px;
+  font-weight: lighter;
+  color: #454545;
+  width: 25%;
+  text-align: right;
+}
+
+.tip-row-1 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.tip-content {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.tip-row-2 {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.tip-verify {
+  font-size: 12px;
+  font-weight: lighter;
+  width: 15%;
+}
+
+.tip-location {
+  font-size: 12px;
+  font-weight: lighter;
+  width: 85%;
+  text-align: right;
+}
+
+.tip-row-3 {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  color: #454545;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
