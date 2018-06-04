@@ -9,8 +9,10 @@ Page({
   data: {
     tipData: [],
     myFollowData: [],
+    recommendTipData: [],
     currentTab: 0,
-    listRowHeight: 75
+    listRowHeight: 75,
+    swiperHeight: 0
   },
   // 分页
   currentPage: 0,
@@ -22,6 +24,9 @@ Page({
   myFollowHasNext: true,
   myFollowIds: [],
   myFollowHasLoad: false,
+
+  // 随机推荐分页
+  recommendTipHasLoad: false,
   /**
    * 生命周期函数--监听页面加载
    */
@@ -49,11 +54,40 @@ Page({
         this.myFollowHasLoad = true;
       }
       this.onMyFollowTipTabShow();
+    } else if (currentTabIndex == 2) {
+      if (this.recommendTipHasLoad == false) {
+        this.onRecommendTipTabLoad();
+        this.onRecommendTipHasLoad = true;
+      }
+      this.onRecommendTipTabShow();
     }
 
     this.setData({
       currentTab: currentTabIndex,
-    })
+    });
+
+    this.updateSwiperHeight();
+  },
+
+  updateSwiperHeight: function () {
+    var numberOfRow = 0;
+    var swiperHeight = app.globalData.systemInfo.windowHeight;
+    
+    if (this.data.currentTab == 0) {
+      numberOfRow = this.data.tipData.length;
+    } else if (this.data.currentTab == 1) {
+      numberOfRow = this.data.myFollowData.length;
+    } else if (this.data.currentTab == 2) {
+      numberOfRow = this.data.recommendTipData.length;
+    } 
+
+    let h = numberOfRow * this.data.listRowHeight + 46;
+    if (h > swiperHeight) {
+      swiperHeight = h;
+    }
+    this.setData({
+      swiperHeight: swiperHeight
+    });
   },
 
   showDetail: function (e) {
@@ -75,16 +109,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log("onShow");
+    this.updateSwiperHeight();
   },
 
   onMyFollowTipTabShow: function () {
-    console.log("myFollowTipTabShow")
+    console.log("myFollowTipShow");
   },
   onMyFollowTipTabLoad: function () {
     this.fetchMyFollowIds(
       this.fetchMyFollowDataAtCurrentPageAndRender
     );
+  },
+
+  onRecommendTipTabShow: function () {
+    console.log("myFollowTipShow");
+  },
+  onRecommendTipTabLoad: function () {
+    this.fetchRecommendTipDataAndRender();
   },
 
   // f: 取回成功的回调,可为空
@@ -131,11 +172,27 @@ Page({
 
       let myFollow = that.data.myFollowData.concat(res.data.objects)
       that.setData({ myFollowData: myFollow });
-
+      that.updateSwiperHeight();
     }, err => {
       console.log(err);
     });
 
+  },
+
+  fetchRecommendTipDataAndRender: function () {
+    let tableId = app.globalData.tableID.tips;
+    let query = new wx.BaaS.Query();
+    query.compare('isVerified', '=', true);
+    
+    let tableObject = this.createTableObject(tableId, query, 0);
+    tableObject.find().then(res => {
+      this.setData({
+        recommendTipData: res.data.objects
+      });
+      that.updateSwiperHeight();
+    }, err => {
+      console.log(err);
+    });
   },
 
   fetchTipsAndShow: function () {
@@ -159,6 +216,7 @@ Page({
           var tipData = that.data.tipData;
           var concatData = tipData.concat(res.data.objects);
           that.setData({ tipData: concatData});
+          that.updateSwiperHeight();
         }, function (err) {
           console.log(err);
           wx.showToast({
@@ -169,6 +227,7 @@ Page({
       }
     })
   },
+
   catchFollow: function (e) {
     let tip = e.currentTarget.dataset.tip;
     console.log(tip);
@@ -272,8 +331,10 @@ Page({
       this.fetchMyFollowIds(
         this.fetchMyFollowDataAtCurrentPageAndRender
       )
+    } else if (this.data.currentTab == 2) {
+      this.fetchRecommendTipDataAndRender();
     }
-    
+    this.updateSwiperHeight();
   },
 
   /**
@@ -291,7 +352,7 @@ Page({
         this.fetchMyFollowDataAtCurrentPageAndRender();
       }
     }
-    
+    this.updateSwiperHeight();
   },
 
   /**
