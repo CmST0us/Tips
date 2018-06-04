@@ -1,1 +1,5 @@
 /* myTaskList/myTaskList.wxss */
+.my-task-list-row {
+  height: 75px;
+  font-size: 15;
+}

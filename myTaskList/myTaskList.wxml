@@ -1,2 +1,9 @@
-<!--myTaskList/myTaskList.wxml-->
-<text>myTaskList/myTaskList.wxml</text>
+  <view class='my-task-list-section'>
+    <text class='my-task-list-title'>{{listWord}}</text>
+    <block wx:for='{{myTaskList}}' wx:for-index='index'>
+      <view class='my-task-list-row' bindtap='showDetail' data-tip='{{item}}'>
+        <text>{{index}}. 类型:{{item.tipType}}, 内容: {{item.content}}, 是否校验:{{item.isVerified}}</text>
+      </view>
+    </block>
+    <!-- <text class='myTaskList' bindtap='showMyTaskList'>我的任务列表</text> -->
+  </view>
