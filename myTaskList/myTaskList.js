@@ -135,8 +135,9 @@ Page({
     let app = getApp();
     console.log(e.currentTarget.dataset.tip);
     app.globalData.currentTip = e.currentTarget.dataset.tip;
+    let word = this.data.listType == 'tipsList' ? 'whatever' : 'my';
     wx.navigateTo({
-      url: '../detail/detail?page=' + 'my',
+      url: '../detail/detail?page=' + word,
     });
 
   },
