@@ -11,7 +11,7 @@ Page({
     myFollowData: [],
     recommendTipData: [],
     currentTab: 0,
-    listRowHeight: 150,
+    listRowHeight: 280,
     swiperHeight: 0
   },
   // 分页
@@ -81,7 +81,7 @@ Page({
       numberOfRow = this.data.recommendTipData.length;
     } 
 
-    let h = numberOfRow * this.data.listRowHeight + 46;
+    let h = numberOfRow * (this.data.listRowHeight + 8);
     if (h > swiperHeight) {
       swiperHeight = h;
     }

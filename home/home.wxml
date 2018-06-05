@@ -8,28 +8,38 @@
   <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{swiperHeight}}px'>
 
     <swiper-item>
-      <scroll-view scroll-y='{{true}}' bindscrolltoupper='onPullDownRefresh' bindscrolltolower='onReachBottom'>
         <block wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index">
-          <view class='tip-row' bindtap='showDetail' data-tip='{{item}}'>
+          <view class='tip-row' bindtap='showDetail' data-tip='{{item}}' style="height:{{listRowHeight}}px">
 
             <view class='tip-row-1'>
-              <text class='tip-title'>{{item.tipType}} </text>
-              <text class='tip-time'>{{item.created_at}}</text>
+              <!-- <image></image> -->
+              <text class="tip-title">何文辉等500人关注了</text>
+              
+              
             </view>
-            <view class='tip-row-2'>
-              <text class='tip-content'>{{item.content}}</text>
-            </view>
-            <view class="tip-row-3">
+
+            <view class="tip-row-2">
               <text class='tip-verify'>未验证</text>
               <text class='tip-location'>广东省广州市</text>
             </view>
 
-            <button class='followBtn' catchtap='catchFollow' data-tip='{{item}}'>关注</button>
+            <view class='tip-row-3'>
+              <text class='tip-content'>{{item.content}}</text>
+            </view>
+
+            <view class="tip-row-4">
+              <view class="tip-type-and-time">
+                <text class='tip-type'>{{item.tipType}} </text> 
+                <text class='tip-time'>{{item.created_at}}</text>  
+              </view>
+              <view class="tip-follow-btn-box">
+                <button class='tip-follow-btn' catchtap='catchFollow' data-tip='{{item}}'>关注</button>
+              </view>
+            </view>
 
           </view>
 
         </block>
-      </scroll-view>
     </swiper-item>
 
     <swiper-item>

@@ -31,21 +31,6 @@
 } 
 
 /*Row Cell Style  */
-
-.tip-row {
-  background-color: white;
-  margin-bottom: 4px;
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: 12px;
-  padding-top: 12px;
-  padding-right: 12px;
-  border-top: 1rpx solid #ededed;
-  border-bottom: 1rpx solid #ededed;
-  height: auto;
-  position: relative;
-}
-
 .follow-row {
   background-color: white;
   margin-bottom: 4px;
@@ -60,36 +45,26 @@
   position: relative;
 }
 
+.tip-row {
+  background-color: white;
+  margin-bottom: 6px;
+  margin-left: 12px;
+  margin-right: 12px;
+  margin-top: 6px;
+  padding: 12px;
+  border: 1rpx solid #ededed;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+}
+
 .tip-title {
   font-size: 20px;
   font-weight: bold;
-  width: 75%;
-}
-
-.tip-time {
-  font-size: 12px;
-  font-weight: lighter;
-  color: #454545;
-  width: 25%;
-  text-align: right;
 }
 
 .tip-row-1 {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  height: auto;
-}
-
-.tip-content {
-  font-size: 16px;
-  font-weight: normal;
-}
-
-.tip-row-2 {
-  padding-top: 4px;
-  padding-bottom: 4px;
   height: auto;
 }
 
@@ -106,7 +81,7 @@
   text-align: right;
 }
 
-.tip-row-3 {
+.tip-row-2 {
   padding-top: 4px;
   padding-bottom: 4px;
   color: #454545;
@@ -117,6 +92,69 @@
   height: auto;
 }
 
+.tip-content {
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.tip-row-3 {
+  height: 75%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+
+}
+
+.tip-type {
+  font-size: 16px;
+  text-align: center;
+  border: 1rpx solid #000;
+  padding-left: 10px;
+  padding-right: 6px; 
+}
+
+.tip-time {
+  font-size: 12px;
+  font-weight: lighter;
+  color: #454545;
+  padding-left: 8px;
+}
+
+.tip-follow-btn {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 100px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  box-sizing: unset;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  line-height: unset;
+  border-radius: 5px;
+  overflow: unset;
+  color: #000;
+  background-color: white;
+}
+.tip-follow-btn-on {
+  background-color: black;
+}
+.tip-follow-btn-off {
+  background-color: white;
+}
+
+.tip-type-and-time {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  width: 50%;
+}
+.tip-follow-btn-box {
+  width: 50%;
+  text-align: right;
+}
+.tip-row-4 {
+  display: flex;
+  flex-direction: row;
+}
 scroll-view{
   height: 100%;
 }
