@@ -9,8 +9,18 @@
       </picker>
     </view>
     <view class='tipContentView'>
-      <input class='tipContent' placeholder='请输入tip的内容' maxlength='-1' name='input'>
-    </input>
+      <textarea class='tipContent' placeholder='请输入tip的内容' maxlength='-1' name='input'>
+    </textarea>
+    </view>
+    <view class='mediaSelectionView'>
+      <view class='picSelectionView'>
+        <text class='picSelectionText' bindtap='selectPics'>选择图片</text>
+        <image src='{{picSrc}}' wx:if='{{isPicSelected}}'></image>
+      </view>
+      <view class='videoSelectionView'>
+        <text class='videoSelectionText' bindtap='selectVideo'>选择视频</text>
+        <video src='{{videoSrc}}' wx:if='{{isVideoSelected}}'></video>
+      </view>
     </view>
     <view class='lcContainer'>
       <text class='currentLocation'>当前位置：{{position.name}}</text>

@@ -1,6 +1,7 @@
 // upload/upload.js
 //PYTBZ-W6MRF-MSCJS-JUYGZ-ZLD6S-36BKY
 let QQMapWX = require('../libs/qqmap-wx-jssdk.min.js');
+let app = getApp();
 Page({
 
   /**
@@ -9,7 +10,15 @@ Page({
   data: {
     pickerIndex: 0,
     typeArr:["饮食","娱乐","生活","出行"],
-    position: {}
+    position: {},
+    picSrc: [],
+    videoSrc: [],
+    isPicSelected: false,
+    isVideoSelected: false,
+    picPath: '',
+    videoPath: '',
+    content: '',
+    index: 0
   },
 
   /**
@@ -102,29 +111,106 @@ Page({
   },
   formSubmit: function(e){
     let that = this;
-    let tableID = '37869';
-    let index = e.detail.value["picker"];
+    wx.showLoading({
+      title: '正在提交',
+    });
+    if(that.data.picSrc.length != 0 && that.data.videoSrc.length == 0){
+      let pic = new wx.BaaS.File();
+      let fileParams = { filePath: that.data.picSrc[0] }
+      let metaData = { categoryName: 'SDK' }
+      pic.upload(fileParams, metaData).then(function (res) {
+        console.log(res);
+        that.setData({
+          picPath: res.data.path,
+          content: e.detail.value["input"],
+          index: e.detail.value["picker"]
+        });
+        that.createTableObjectAndUpdate();
+      }, function (err) {
+        console.log(err);
+        wx.showToast({
+          title: '网络故障',
+          image: '../image/netError.png'
+        });
+      })
+    }
+    if(that.data.videoSrc.length != 0 && that.data.picSrc.length == 0){
+      let video = new wx.BaaS.File();
+      let fileParams = { filePath: that.data.videoSrc }
+      let metaData = { categoryName: 'SDK' }
+      video.upload(fileParams, metaData).then(function (res) {
+        console.log(res);
+        that.setData({ 
+          videoPath: res.data.path,
+          content: e.detail.value["input"],
+          index: e.detail.value["picker"] 
+        });
+        that.createTableObjectAndUpdate();
+      }, function (err) {
+        console.log(err);
+        wx.showToast({
+          title: '网络故障',
+          image: '../image/netError.png'
+        });
+      })
+    }
+
+    if (that.data.videoSrc.length != 0 && that.data.picSrc.length != 0){
+      let video = new wx.BaaS.File();
+      let fileParams_out = { filePath: that.data.videoSrc }
+      let metaData = { categoryName: 'SDK' }
+      video.upload(fileParams_out, metaData).then(function (res) {
+        console.log(res);
+        that.setData({
+          videoPath: res.data.path,
+          content: e.detail.value["input"],
+          index: e.detail.value["picker"]
+        });
+      
+        let pic = new wx.BaaS.File();
+        let fileParams_in = { filePath: that.data.picSrc[0] };
+        pic.upload(fileParams_in, metaData).then(function(res){
+          that.setData({picPath: res.data.path});
+          that.createTableObjectAndUpdate();
+        }, function(err){
+          console.log(err);
+          wx.showToast({
+            title: '网络故障',
+            image: '../image/netError.png'
+          });
+        })
+      }, function (err) {
+        console.log(err);
+        wx.showToast({
+          title: '网络故障',
+          image: '../image/netError.png'
+        });
+      })
+    } else if (that.data.videoSrc.length == 0 && that.data.picSrc.length == 0){
+      that.createTableObjectAndUpdate();
+    }
     
-    let latitude = that.data.position.latitude;
-    let longitude = that.data.position.longitude;
+  },
+  createTableObjectAndUpdate: function(){
+    let latitude = this.data.position.latitude;
+    let longitude = this.data.position.longitude;
     let point = new wx.BaaS.GeoPoint(longitude, latitude);
     let tip = {
-      tipType: that.data.typeArr[index],
-      content: e.detail.value["input"],
+      tipType: this.data.typeArr[this.data.index],
+      content: this.data.content,
       longitude: longitude,
       latitude: latitude,
       position: point,
       isVerified: false,
       participantID: [],
       locationName: this.data.position.name,
-      locationAddress: this.data.position.address
+      locationAddress: this.data.position.address,
+      videoPath: this.data.videoPath,
+      picPath: this.data.picPath
     }
     console.log(tip)
-    let tipTableObject = new wx.BaaS.TableObject(tableID);
+    let tipTableObject = new wx.BaaS.TableObject(app.globalData.tableID.tips);
     let tipTable = tipTableObject.create();
-    wx.showLoading({
-      title: '正在提交',
-    })
     tipTable.set(tip).save().then(function (res) {
       wx.showToast({
         title: '提交成功',
@@ -133,11 +219,17 @@ Page({
     }, function (err) {
       console.log(err);
     })
-      
-    
   },
   formReset: function(){
     console.log('form表单重置');
+    this.setData({
+      picSrc: [],
+      videoSrc: [],
+      picPath: '',
+      videoPath: '',
+      isPicSelected: false,
+      isVideoSelected: false
+    });
   },
   bindChooseLocation: function(e){
     let that = this;
@@ -162,5 +254,31 @@ Page({
         console.log(err);
       }
     })
+  },
+  selectPics: function(e){
+    let that = this;
+    wx.chooseImage({
+      count: 1,
+      success: function(res) {
+        let src = res.tempFilePaths;
+        that.setData({
+          picSrc: src,
+          isPicSelected: true
+        });
+      },
+    });
+
+  },
+  selectVideo: function(e){
+    let that = this;
+    wx.chooseVideo({
+      success: function(res){
+        let src = res.tempFilePath;
+        that.setData({
+          videoSrc: src,
+          isVideoSelected: true
+        });
+      }
+    });
   }
 })

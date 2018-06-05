@@ -21,6 +21,9 @@ Page({
       listType: options.listtype,
       listWord: options.listtype == 'tipsList' ? '我的tips列表' : '我的任务列表'
     });
+    wx.setNavigationBarTitle({
+      title: options.listtype == 'tipsList' ? '我的tips列表' : '我的任务列表',
+    })
   },
   showMyTaskList: function (listType) {
     let that = this;
