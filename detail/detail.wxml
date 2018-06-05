@@ -6,4 +6,5 @@
   <text class='locationAddress'>位置：{{tipData.locationAddress}}</text>
   <button class='followBtn' bindtap='bindFollow'>{{btnWord}}</button>
   <button class='checkBtn'  bindtap='bindCheck' wx:if='{{isFromMy}}' disabled='{{isVerified}}'>{{checkBtnWord}}</button>
+  <button class='failBtn' wx:if="{{isFromHome}}" bindtap='bindFail' data-id='{{tipData.id}}' disabled='{{isFailed}}'>{{failBtnWord}}</button>
 </view>

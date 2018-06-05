@@ -11,7 +11,10 @@ Page({
     isFollowed: false,
     isFromMy: false,
     isVerified: false,
-    checkBtnWord: '验证通过'
+    checkBtnWord: '验证通过',
+    failBtnWord: '无效',
+    isFromHome: true,
+    isFailed: false
   },
 
   /**
@@ -25,8 +28,9 @@ Page({
     let uid = wx.BaaS.storage.get('uid');
     let that = this;
     if (options.page == 'my') {
-      this.setData({
-        isFromMy: true
+      that.setData({
+        isFromMy: true,
+        isFromHome: false
       });
       let verifiedTableObject = new wx.BaaS.TableObject(app.globalData.tableID.isVerified);
       let query = new wx.BaaS.Query();
@@ -44,8 +48,24 @@ Page({
           image: '../image/netError.png'
         });
       })
-    }
+    } 
     that.setData({ tipData: tip });
+    if(this.data.isFromHome){
+      let tipTableObject = new wx.BaaS.TableObject(app.globalData.tableID.tips);
+      tipTableObject.get(tip.id).then(function(res){
+        if (res.data.verifyNum == 0){
+          that.setData({
+            isFailed: true,
+            failBtnWord: '已经无效'
+          });
+        }
+      }, function(err){
+        wx.showToast({
+          title: '网络故障',
+          image: '../image/netError.png'
+        });
+      })
+    }
     let followTableObject = new wx.BaaS.TableObject(app.globalData.tableID.follow);
     let followQuery = new wx.BaaS.Query();
     followQuery.compare('created_by', '=', uid);
@@ -215,6 +235,45 @@ Page({
         image: '../image/netError.png'
       });
     })
+  },
+  bindFail: function(e){
+    let that = this;
+    let id = e.currentTarget.dataset.id;
+    console.log(id);
+    let tipTableObject = new wx.BaaS.TableObject(app.globalData.tableID.tips);
+    wx.showLoading({
+      title: '正在加载',
+    });
+    tipTableObject.get(id).then(function(res){
+      wx.hideLoading();
+      if (res.data.verifyNum != 0){
+        let verifyNum = res.data.verifyNum - 1;
+        let tipRecord = tipTableObject.getWithoutData(id);
+        tipRecord.set({ 
+          verifyNum: verifyNum,
+          isVerified: verifyNum == 0 ? false : true 
+        });
+        tipRecord.update().then(function(saveRes){
+          that.setData({
+            isFailed: saveRes.data.isVerified,
+            failBtnWord: '已经无效'
+          });
+        }, function(saveErr){
+          wx.showToast({
+            title: '网络故障',
+            image: '../image/netError.png'
+          });
+        })
+      }else{
+        wx.showToast({
+          title: '已经无效',
+          image: '../image/commonErr.png'
+        });
+      }
+    }, function(err){
+
+    })
+
   },
 
   /**
