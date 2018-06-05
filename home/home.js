@@ -94,7 +94,7 @@ Page({
     console.log(e.currentTarget.dataset.tip);
     app.globalData.currentTip = e.currentTarget.dataset.tip;
     wx.navigateTo({
-      url: '../detail/detail'
+      url: '../detail/detail?page=' + 'home'
     });
   },
 
@@ -169,7 +169,6 @@ Page({
       } else {
         that.myFollowHasNext = true;
       }
-
       let myFollow = that.data.myFollowData.concat(res.data.objects)
       that.setData({ myFollowData: myFollow });
       that.updateSwiperHeight();
@@ -318,7 +317,9 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function () { 
+    console.log('pulldown')
+    this.setData({refreshing: true});
     if (this.data.currentTab == 0) {
       this.currentPage = 0;
 
@@ -335,12 +336,15 @@ Page({
       this.fetchRecommendTipDataAndRender();
     }
     this.updateSwiperHeight();
+    //wx.hideLoading();
   },
+
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    console.log('reachbottom')
     if (this.data.currentTab == 0) {
       if (this.hasNext == true) {
         this.currentPage += 1;

@@ -8,44 +8,49 @@
   <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{swiperHeight}}px'>
 
     <swiper-item>
-      <block wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index" wx:key="id">
-        <view class='tip-row' bindtap='showDetail' data-tip='{{item}}' style="height:{{listRowHeight}}px">
-          
-          <view class='tip-row-1'>
-            <text class='tip-title'>{{item.tipType}} </text>
-            <text class='tip-time'>1-1 12:00</text>
-          </view>
-          <view class='tip-row-2'>
-            <text class='tip-content'>{{item.content}}</text>
-          </view>
-          <view class="tip-row-3">
-            <text class='tip-verify'>未验证</text>
-          <text class='tip-location'>广东省广州市</text>
-          </view>
-          
-          <button class='followBtn' catchtap='catchFollow' data-tip='{{item}}' >关注</button>
+      <scroll-view scroll-y='{{true}}' bindscrolltoupper='onPullDownRefresh' bindscrolltolower='onReachBottom'>
+        <block wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index">
+          <view class='tip-row' bindtap='showDetail' data-tip='{{item}}'>
 
-        </view>
-      </block>
+            <view class='tip-row-1'>
+              <text class='tip-title'>{{item.tipType}} </text>
+              <text class='tip-time'>{{item.created_at}}</text>
+            </view>
+            <view class='tip-row-2'>
+              <text class='tip-content'>{{item.content}}</text>
+            </view>
+            <view class="tip-row-3">
+              <text class='tip-verify'>未验证</text>
+              <text class='tip-location'>广东省广州市</text>
+            </view>
+
+            <button class='followBtn' catchtap='catchFollow' data-tip='{{item}}'>关注</button>
+
+          </view>
+
+        </block>
+      </scroll-view>
     </swiper-item>
 
     <swiper-item>
-      <block wx:for="{{myFollowData}}" wx:for-item="item" wx:for-index="index" wx:key="id">
-        <view class='follow-row' bindtap='showDetail' data-tip='{{item}}' style="height:{{listRowHeight}}px">
-          <text class='tipType'>{{index}}tip种类：{{item.tipType}} </text>
-          <text class='tipContent'>tip内容：{{item.content}}</text>
-        </view>
-      </block>
+      <scroll-view scroll-y='{{true}}' bindscrolltoupper='onPullDownRefresh' bindscrolltolower='onReachBottom'>
+        <block wx:for="{{myFollowData}}" wx:for-item="item" wx:for-index="index" wx:key="id">
+          <view class='follow-row' bindtap='showDetail' data-tip='{{item}}' style="height:{{listRowHeight}}px">
+            <text class='tipType'>{{index}}tip种类：{{item.tipType}} </text>
+            <text class='tipContent'>tip内容：{{item.content}}</text>
+          </view>
+        </block>
+      </scroll-view>
     </swiper-item>
 
     <swiper-item>
 
       <!--第一页已经验证的tip  -->
       <block wx:for="{{recommendTipData}}" wx:for-item="item" wx:for-index="index" wx:key="id">
-        <view class='recommend-row' bindtap='showDetail' data-tip='{{item}}'style="height:{{listRowHeight}}px">
+        <view class='recommend-row' bindtap='showDetail' data-tip='{{item}}' style="height:{{listRowHeight}}px">
           <text class='tipType'>{{index}}tip种类：{{item.tipType}} </text>
           <text class='tipContent'>tip内容：{{item.content}}</text>
-          <button class='followBtn' catchtap='catchFollow' data-tip='{{item}}' >关注</button>
+          <button class='followBtn' catchtap='catchFollow' data-tip='{{item}}'>关注</button>
         </view>
       </block>
 

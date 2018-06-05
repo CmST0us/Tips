@@ -22,6 +22,7 @@
 
 .swiper {  
   background: #f8f8f8;  
+  
 }  
   
 .on {  
@@ -41,6 +42,22 @@
   padding-right: 12px;
   border-top: 1rpx solid #ededed;
   border-bottom: 1rpx solid #ededed;
+  height: auto;
+  position: relative;
+}
+
+.follow-row {
+  background-color: white;
+  margin-bottom: 4px;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 12px;
+  padding-top: 12px;
+  padding-right: 12px;
+  border-top: 1rpx solid #ededed;
+  border-bottom: 1rpx solid #ededed;
+  height: auto;
+  position: relative;
 }
 
 .tip-title {
@@ -62,6 +79,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
+  height: auto;
 }
 
 .tip-content {
@@ -72,6 +90,7 @@
 .tip-row-2 {
   padding-top: 4px;
   padding-bottom: 4px;
+  height: auto;
 }
 
 .tip-verify {
@@ -95,4 +114,13 @@
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
+  height: auto;
+}
+
+scroll-view{
+  height: 100%;
+}
+
+swiper-item{
+  width: 100%;
 }
