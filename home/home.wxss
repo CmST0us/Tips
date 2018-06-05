@@ -98,10 +98,9 @@
 }
 
 .tip-row-3 {
-  height: 75%;
+  height: 100%;
   padding-top: 4px;
   padding-bottom: 4px;
-
 }
 
 .tip-type {
