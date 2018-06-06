@@ -112,6 +112,8 @@ Page({
   },
   bindPickerChange: function (e) {
     console.log(e);
+    let pickerIndex = parseInt(e.detail.value);
+    this.setData({pickerIndex: pickerIndex});
   },
   formSubmit: function (e) {
     let that = this;

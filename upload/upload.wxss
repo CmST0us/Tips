@@ -20,7 +20,7 @@
 
 .pickerInput{
   font-size: 35rpx;
-  width: 75rpx;
+  width: 200rpx;
 }
 
 .tipContentView{

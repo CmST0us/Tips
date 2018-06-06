@@ -4,7 +4,7 @@
       <text class='pickerText'>请选择您要提交的tip的种类：</text>
       <picker class='typePicker' bindchange='bindPickerChange' range='{{typeArr}}' name='picker' value='{{pickerIndex}}'>
         <view class="picker">
-          <input value="{{typeArr[0]}}" class='pickerInput'></input>
+         <input value="{{typeArr[pickerIndex]}}" class='pickerInput' placeholder='请点击此处'></input>
         </view>
       </picker>
     </view>
