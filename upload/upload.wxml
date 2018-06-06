@@ -10,12 +10,14 @@
     </view>
     <view class='tipContentView'>
       <textarea class='tipContent' placeholder='请输入tip的内容' maxlength='-1' name='input'>
-    </textarea>
+      </textarea>
     </view>
     <view class='mediaSelectionView'>
       <view class='picSelectionView'>
         <text class='picSelectionText' bindtap='selectPics'>选择图片</text>
-        <image src='{{picSrc}}' wx:if='{{isPicSelected}}'></image>
+        <block class='imageView' wx:if='{{isPicSelected}}' wx:for='{{picSrc}}'>
+          <image src='{{item}}'></image>
+        </block>
       </view>
       <view class='videoSelectionView'>
         <text class='videoSelectionText' bindtap='selectVideo'>选择视频</text>
@@ -29,6 +31,6 @@
     <view class="btn-area">
       <button formType="submit" class='btn'>提交</button>
       <button formType="reset" class='btn'>重置</button>
-  </view>
+    </view>
   </form>
 </view>

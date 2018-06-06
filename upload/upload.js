@@ -9,7 +9,7 @@ Page({
    */
   data: {
     pickerIndex: 0,
-    typeArr:["饮食","娱乐","生活","出行"],
+    typeArr: ["饮食", "娱乐", "生活", "出行"],
     position: {},
     picSrc: [],
     videoSrc: [],
@@ -18,14 +18,25 @@ Page({
     picPath: '',
     videoPath: '',
     content: '',
-    index: 0
+    index: 0,
+    picUrls: [],
+    picSrcLength: 0,
+    haveBeenUpdated: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
     let that = this;
+    that.formReset();
     let qqmapsdk = new QQMapWX({
       key: 'PYTBZ-W6MRF-MSCJS-JUYGZ-ZLD6S-36BKY' // 必填
     });
@@ -34,14 +45,14 @@ Page({
     });
     wx.getLocation({
       type: 'wgs84',
-      success: function(res) {
+      success: function (res) {
         console.log(res);
         qqmapsdk.reverseGeocoder({
           location: {
             latitude: res.latitude,
             longitude: res.longitude
           },
-          success: function(addressRes){
+          success: function (addressRes) {
             wx.hideLoading();
             console.log(addressRes);
             let position = {
@@ -53,79 +64,88 @@ Page({
             that.setData({ position: position });
           }
         });
-        
+
       },
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   },
-  bindPickerChange: function(e){
+  bindPickerChange: function (e) {
     console.log(e);
   },
-  formSubmit: function(e){
+  formSubmit: function (e) {
     let that = this;
+    let index = that.data.picSrc.length - that.data.picSrcLength;
     wx.showLoading({
       title: '正在提交',
     });
-    if(that.data.picSrc.length != 0 && that.data.videoSrc.length == 0){
+    if (that.data.picSrc.length != 0 && that.data.videoSrc.length == 0) {
       let pic = new wx.BaaS.File();
-      let fileParams = { filePath: that.data.picSrc[0] }
-      let metaData = { categoryName: 'SDK' }
+      let fileParams = { filePath: that.data.picSrc[index] };
+      console.log(fileParams);
+      let metaData = { categoryName: 'SDK' };
+
       pic.upload(fileParams, metaData).then(function (res) {
-        console.log(res);
+        console.log(res.data.path);
+        let picUrls = that.data.picUrls;
+        picUrls.push(res.data.path);
+        that.setData({ picSrcLength: that.data.picSrcLength - 1 });
         that.setData({
-          picPath: res.data.path,
-          content: e.detail.value["input"],
-          index: e.detail.value["picker"]
+          picUrls: picUrls,
+          content: that.data.haveBeenUpdated ? that.data.content : e.detail.value["input"],
+          index: that.data.haveBeenUpdated ? that.data.index : e.detail.value["picker"],
+          haveBeenUpdated: true
         });
-        that.createTableObjectAndUpdate();
+
+        console.log(typeof that.data.picUrls);
+        if (that.data.picSrcLength > 0) {
+          console.log(that.data);
+          //that.setData({ picSrcLength: that.data.picSrcLength - 1 });
+          that.formSubmit({});
+        } else if (that.data.picSrcLength == 0) {
+          that.createTableObjectAndUpdate();
+        }
+
       }, function (err) {
         console.log(err);
         wx.showToast({
@@ -134,16 +154,16 @@ Page({
         });
       })
     }
-    if(that.data.videoSrc.length != 0 && that.data.picSrc.length == 0){
+    if (that.data.videoSrc.length != 0 && that.data.picSrc.length == 0) {
       let video = new wx.BaaS.File();
       let fileParams = { filePath: that.data.videoSrc }
       let metaData = { categoryName: 'SDK' }
       video.upload(fileParams, metaData).then(function (res) {
         console.log(res);
-        that.setData({ 
+        that.setData({
           videoPath: res.data.path,
           content: e.detail.value["input"],
-          index: e.detail.value["picker"] 
+          index: e.detail.value["picker"]
         });
         that.createTableObjectAndUpdate();
       }, function (err) {
@@ -155,30 +175,39 @@ Page({
       })
     }
 
-    if (that.data.videoSrc.length != 0 && that.data.picSrc.length != 0){
-      let video = new wx.BaaS.File();
-      let fileParams_out = { filePath: that.data.videoSrc }
+    if (that.data.videoSrc.length != 0 && that.data.picSrc.length != 0) {
+      let index = that.data.picSrc.length - that.data.picSrcLength;
+      let pic = new wx.BaaS.File();
+      let fileParams_out = { filePath: that.data.picSrc[index] };
       let metaData = { categoryName: 'SDK' }
-      video.upload(fileParams_out, metaData).then(function (res) {
-        console.log(res);
+      pic.upload(fileParams_out, metaData).then(function (res) {
+        console.log(res.data.path);
+        let picUrls = that.data.picUrls;
+        picUrls.push(res.data.path);
+        that.setData({ picSrcLength: that.data.picSrcLength - 1 });
         that.setData({
-          videoPath: res.data.path,
-          content: e.detail.value["input"],
-          index: e.detail.value["picker"]
+          picUrls: picUrls,
+          content: that.data.haveBeenUpdated ? that.data.content : e.detail.value["input"],
+          index: that.data.haveBeenUpdated ? that.data.index : e.detail.value["picker"],
+          haveBeenUpdated: true
         });
-      
-        let pic = new wx.BaaS.File();
-        let fileParams_in = { filePath: that.data.picSrc[0] };
-        pic.upload(fileParams_in, metaData).then(function(res){
-          that.setData({picPath: res.data.path});
-          that.createTableObjectAndUpdate();
-        }, function(err){
-          console.log(err);
-          wx.showToast({
-            title: '网络故障',
-            image: '../image/netError.png'
-          });
-        })
+        if (that.data.picSrcLength > 0) {
+          console.log(that.data);
+          that.formSubmit({});
+        } else if (that.data.picSrcLength == 0) {
+          let video = new wx.BaaS.File();
+          let fileParams_in = { filePath: that.data.videoSrc };
+          video.upload(fileParams_in, metaData).then(function (res) {
+            that.setData({ videoPath: res.data.path });
+            that.createTableObjectAndUpdate();
+          }, function (err) {
+            console.log(err);
+            wx.showToast({
+              title: '网络故障',
+              image: '../image/netError.png'
+            });
+          })
+        }
       }, function (err) {
         console.log(err);
         wx.showToast({
@@ -186,12 +215,12 @@ Page({
           image: '../image/netError.png'
         });
       })
-    } else if (that.data.videoSrc.length == 0 && that.data.picSrc.length == 0){
+    } else if (that.data.videoSrc.length == 0 && that.data.picSrc.length == 0) {
       that.createTableObjectAndUpdate();
     }
-    
+
   },
-  createTableObjectAndUpdate: function(){
+  createTableObjectAndUpdate: function (p) {
     let latitude = this.data.position.latitude;
     let longitude = this.data.position.longitude;
     let point = new wx.BaaS.GeoPoint(longitude, latitude);
@@ -206,7 +235,7 @@ Page({
       locationName: this.data.position.name,
       locationAddress: this.data.position.address,
       videoPath: this.data.videoPath,
-      picPath: this.data.picPath
+      picPath: this.data.picUrls
     }
     console.log(tip)
     let tipTableObject = new wx.BaaS.TableObject(app.globalData.tableID.tips);
@@ -220,21 +249,21 @@ Page({
       console.log(err);
     })
   },
-  formReset: function(){
+  formReset: function () {
     console.log('form表单重置');
     this.setData({
       picSrc: [],
-      videoSrc: [],
+      videoSrc: '',
       picPath: '',
       videoPath: '',
       isPicSelected: false,
       isVideoSelected: false
     });
   },
-  bindChooseLocation: function(e){
+  bindChooseLocation: function (e) {
     let that = this;
     wx.chooseLocation({
-      success: function(res) {
+      success: function (res) {
         console.log(res);
         wx.showToast({
           title: '地点选择成功',
@@ -250,29 +279,35 @@ Page({
         }
         that.setData({ position: position });
       },
-      fail: function(err){
+      fail: function (err) {
         console.log(err);
       }
     })
   },
-  selectPics: function(e){
+  selectPics: function (e) {
     let that = this;
     wx.chooseImage({
-      count: 1,
-      success: function(res) {
+      count: 9,
+      success: function (res) {
+        console.log(res);
         let src = res.tempFilePaths;
         that.setData({
           picSrc: src,
-          isPicSelected: true
+          isPicSelected: true,
+          picSrcLength: src.length
         });
+        console.log(that);
       },
+      fail: function (err) {
+        console.log(err);
+      }
     });
 
   },
-  selectVideo: function(e){
+  selectVideo: function (e) {
     let that = this;
     wx.chooseVideo({
-      success: function(res){
+      success: function (res) {
         let src = res.tempFilePath;
         that.setData({
           videoSrc: src,
