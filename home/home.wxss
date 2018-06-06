@@ -95,6 +95,12 @@
 .tip-content {
   font-size: 24px;
   font-weight: normal;
+  word-break: break-all;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+
 }
 
 .tip-image {
@@ -114,7 +120,6 @@
   padding-bottom: 4px;
   display: flex;
   flex-direction: column;
-
 }
 
 .tip-type {
