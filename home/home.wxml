@@ -12,18 +12,18 @@
           <view class='tip-row' bindtap='showDetail' data-tip='{{item}}' style="height:{{listRowHeight}}px">
 
             <view class='tip-row-1'>
-              <!-- <image></image> -->
+                 <!-- <image></image>    -->
               <text class="tip-title">何文辉等500人关注了</text>
-              
-              
             </view>
 
             <view class="tip-row-2">
-              <text class='tip-verify'>未验证</text>
-              <text class='tip-location'>广东省广州市</text>
+              <text class='tip-verify'>{{item.isVerified ? "已验证" : "未验证"}}</text>
+              <text class='tip-location'>{{item.locationAddress}}</text>
             </view>
 
             <view class='tip-row-3'>
+              <image class="tip-image" wx:if="{{item.picPath != null && item.picPath.length >0}}" mode="aspectFit" src="{{item.picPath[0]}}"></image>
+              <video class="tip-video"wx:if="{{item.videoPath.length > 0}}" objectFit="fill" src="{{item.videoPath}}"></video>
               <text class='tip-content'>{{item.content}}</text>
             </view>
 

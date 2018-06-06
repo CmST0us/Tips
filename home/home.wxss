@@ -97,10 +97,24 @@
   font-weight: normal;
 }
 
+.tip-image {
+  width: unset;
+  height: 100%;
+}
+
+.tip-video {
+  width: unset;
+  height: 100%;
+}
+
+
 .tip-row-3 {
   height: 100%;
   padding-top: 4px;
   padding-bottom: 4px;
+  display: flex;
+  flex-direction: column;
+
 }
 
 .tip-type {
@@ -153,6 +167,7 @@
 .tip-row-4 {
   display: flex;
   flex-direction: row;
+  margin-bottom: 6px;
 }
 scroll-view{
   height: 100%;
