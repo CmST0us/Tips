@@ -56,14 +56,24 @@ swiper-item{
   flex-wrap: nowrap;
   box-sizing: border-box;
 }
-
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  overflow: hidden;
+}
 .tip-title {
   font-size: 20px;
   font-weight: bold;
+  margin-left: 8px;
+  margin-top: 8px;
 }
 
 .tip-row-1 {
   height: auto;
+  display: flex;
+  flex-direction: row;
+  vertical-align: middle;
 }
 
 .tip-verify {

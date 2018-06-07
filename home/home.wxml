@@ -17,7 +17,11 @@
 
           <view class='tip-row-1'>
             <!-- <image></image>    -->
-            <text class="tip-title">何文辉等500人关注了</text>
+            <!-- <text class="tip-title">何文辉等500人关注了</text> -->
+            <view class="user-avatar">
+              <open-data type="userAvatarUrl"></open-data>
+            </view>
+            <open-data type="userNickName" class="tip-title"></open-data>
           </view>
 
           <view class="tip-row-2">
