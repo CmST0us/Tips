@@ -14,9 +14,7 @@
   border: 1rpx solid #ddd;
   margin:18rpx 0;  
 }
-.task-list-footer{
-  margin-top: -8px;
-}
+
 .task-list-type{
   font-size:14px;
   color:#000;

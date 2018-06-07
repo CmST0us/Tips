@@ -31,3 +31,9 @@ page{
   margin-top:100rpx;
   margin-bottom:50rpx;
 }
+video {
+  width: 100%;
+}
+map {
+  width: 100%;
+}

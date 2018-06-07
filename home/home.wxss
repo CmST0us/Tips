@@ -175,3 +175,9 @@ scroll-view{
 swiper-item{
   width: 100%;
 }
+video {
+  width: 100%;
+}
+map {
+  width: 100%;
+}

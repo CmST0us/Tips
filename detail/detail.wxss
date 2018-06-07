@@ -68,3 +68,10 @@
   width: 41%;
   margin: 4px;
 }
+
+video {
+  width: 100%;
+}
+map {
+  width: 100%;
+}
