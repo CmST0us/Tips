@@ -6,17 +6,25 @@
   padding-top:20rpx;
 }
 .task-list-row {
-  padding:20rpx;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   background:#fff;
-  border: 1rpx solid #fff;
-  margin:40rpx 0;  
+  border: 1rpx solid #ddd;
+  margin:18rpx 0;  
 }
 .task-list-footer{
-  margin:5rpx 0;
+  margin-top: -8px;
 }
 .task-list-type{
-  padding:5rpx;
-  border:1rpx solid #000;
-  font-size:16px;
+  font-size:14px;
   color:#000;
+}
+.tipContent {
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
 }
