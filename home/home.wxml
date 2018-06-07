@@ -11,8 +11,9 @@
   <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{swiperHeight}}px'>
 
     <swiper-item style="position:relative">
+      <wxs src="time.wxs" module="time" />
       <block wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index">
-        <view class='tip-row' catchtap='showDetail' data-tip='{{item}}' style="min-height:{{listRowHeight }}px" >
+        <view class='tip-row' catchtap='showDetail' data-tip='{{item}}' style="min-height:{{listRowHeight}}px" >
 
           <view class='tip-row-1'>
             <!-- <image></image>    -->
@@ -33,7 +34,7 @@
           <view class="tip-row-4">
             <view class="tip-type-and-time">
               <text class='tip-type'>{{item.tipType}} </text>
-              <text class='tip-time'>{{item.created_at}}</text>
+              <text class='tip-time'>{{time.parse(item.created_at)}}</text>
             </view>
             
             <view class="tip-follow-btn-box">

@@ -1,0 +1,7 @@
+// 输入时间戳， 返回格式化后的时间
+module.exports.parse = function(iostime) {
+  // var iostimeNum = parseInt(iostime);
+  // var t = new Date(iostimeNum);
+  // return t.toLocaleString();
+  return iostime;
+}
