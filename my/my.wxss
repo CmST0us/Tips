@@ -1,5 +1,38 @@
 /* my/my.wxss */
-.my-task-list-row {
-  height: 75px;
-  font-size: 15;
+.container{
+   padding: 0 40rpx;
+   padding-top:20rpx;
+}
+.userInfoContainer{
+  text-align: center;
+}
+.avatarImg{
+  width:200rpx;
+  height:200rpx;
+  overflow: hidden;
+  border-radius: 100rpx;
+  display:block;
+  margin:0 auto;
+}
+.userName{
+  font-size:20px;
+}
+.personInfo{
+  display:block;
+  padding:40rpx;
+  width:80%;
+  margin:0 auto;
+}
+
+.item{
+  text-align: left;
+  margin:20rpx 0 ;
+  border-bottom:1rpx solid #ddd;
+  padding:20rpx;
+}
+.icon{
+  width:48rpx;
+  height:48rpx;
+  display:inline-block;
+  margin-right:10rpx;
 }
