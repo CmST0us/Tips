@@ -16,30 +16,31 @@
     "myTaskList/myTaskList"
   ],
   "tabBar": {
+    "selectedColor": "#000",
     "list": [
       {
         "pagePath": "home/home",
         "text": "主页",
         "iconPath": "image/home.png",
-        "selectedIconPath": "image/home.png"
+        "selectedIconPath": "image/home2.png"
       },
       {
         "pagePath": "upload/upload",
         "text": "上传",
         "iconPath": "image/upload.png",
-        "selectedIconPath": "image/upload.png"
+        "selectedIconPath": "image/upload2.png"
       },
       {
         "pagePath": "tasks/tasks",
         "text": "任务",
         "iconPath": "image/task.png",
-        "selectedIconPath": "image/task.png"
+        "selectedIconPath": "image/task2.png"
       },
       {
         "pagePath": "my/my",
         "text": "我的",
         "iconPath": "image/my.png",
-        "selectedIconPath": "image/my.png"
+        "selectedIconPath": "image/my2.png"
       }
     ]
   }
