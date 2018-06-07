@@ -1,5 +1,3 @@
-
- 
 .container {  
   /* margin-left: 10rpx;   */
   /* margin-right: 10rpx;   */
@@ -10,24 +8,27 @@
   display: flex;  
   flex-direction: row;  
   line-height: 80rpx;  
-  border-bottom: 2rpx solid #777;  
+  border-bottom: 2rpx solid #dbdbdb;  
 }  
   
 .tab-item {  
-  width: 33.3%;  
+  flex:1;
   text-align: center;  
-  font-size: 15px;  
-  color: #777;   
+  font-size: 16px;
+  font-weight: bold;  
+  color: #dbdbdb;   
 }  
 
 .swiper {  
-  background: #f8f8f8;  
-  
+  background: #ddd;  
+  position:relative;
 }  
-  
+swiper-item{
+  z-index:999;
+}
 .on {  
-  color: blue;  
-  border-bottom: 5rpx solid blue;  
+  color: #000;  
+
 } 
 
 /*Row Cell Style  */
@@ -47,11 +48,8 @@
 
 .tip-row {
   background-color: white;
-  margin-bottom: 6px;
-  margin-left: 12px;
-  margin-right: 12px;
-  margin-top: 6px;
-  padding: 12px;
+  padding:20rpx 40rpx;
+  margin:40rpx 30rpx; 
   border: 1rpx solid #ededed;
   display: flex;
   flex-direction: column;
@@ -82,44 +80,29 @@
 }
 
 .tip-row-2 {
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding:5rpx;
   color: #454545;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
   height: auto;
+  margin-top:15rpx;
+  
 }
 
 .tip-content {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: normal;
+  padding:0 10rpx;
+  margin-bottom:30rpx;
   word-break: break-all;
-  -webkit-line-clamp: 5;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  display: -webkit-box;
-
+  min-height:80px;
 }
-
-.tip-image {
-  width: unset;
-  height: 100%;
-}
-
-.tip-video {
-  width: unset;
-  height: 100%;
-}
-
 
 .tip-row-3 {
   height: 100%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  display: flex;
-  flex-direction: column;
+  padding:20rpx 0;
 }
 
 .tip-type {
@@ -170,9 +153,11 @@
   text-align: right;
 }
 .tip-row-4 {
+  margin-top:40rpx;
+  padding-top:10rpx;
+  border-top:1rpx solid #bdbdbd;
   display: flex;
   flex-direction: row;
-  margin-bottom: 6px;
 }
 scroll-view{
   height: 100%;

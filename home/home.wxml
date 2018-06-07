@@ -1,45 +1,49 @@
 <view class='container'>
   <view class="swiper-tab">
     <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">附近的tips</view>
-    <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">我的关注</view>
-    <view class="tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">随机推荐</view>
+    <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
+      我的关注</view>
+    <view class="tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">随机推荐
+    </view>
+
   </view>
 
   <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{swiperHeight}}px'>
 
-    <swiper-item>
-        <block wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index">
-          <view class='tip-row' bindtap='showDetail' data-tip='{{item}}' style="height:{{listRowHeight}}px">
+    <swiper-item style="position:relative">
+      <block wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index">
+        <view class='tip-row' catchtap='showDetail' data-tip='{{item}}' style="min-height:{{listRowHeight }}px" >
 
-            <view class='tip-row-1'>
-                 <!-- <image></image>    -->
-              <text class="tip-title">何文辉等500人关注了</text>
-            </view>
-
-            <view class="tip-row-2">
-              <text class='tip-verify'>{{item.isVerified ? "已验证" : "未验证"}}</text>
-              <text class='tip-location'>{{item.locationAddress}}</text>
-            </view>
-
-            <view class='tip-row-3'>
-              <image class="tip-image" wx:if="{{item.picPath != null && item.picPath.length >0}}" mode="aspectFit" src="{{item.picPath[0]}}"></image>
-              <video class="tip-video"wx:if="{{item.videoPath.length > 0}}" objectFit="fill" src="{{item.videoPath}}"></video>
-              <text class='tip-content'>{{item.content}}</text>
-            </view>
-
-            <view class="tip-row-4">
-              <view class="tip-type-and-time">
-                <text class='tip-type'>{{item.tipType}} </text> 
-                <text class='tip-time'>{{item.created_at}}</text>  
-              </view>
-              <view class="tip-follow-btn-box">
-                <button class='tip-follow-btn' catchtap='catchFollow' data-tip='{{item}}'>关注</button>
-              </view>
-            </view>
-
+          <view class='tip-row-1'>
+            <!-- <image></image>    -->
+            <text class="tip-title">何文辉等500人关注了</text>
           </view>
 
-        </block>
+          <view class="tip-row-2">
+            <text class='tip-verify'>{{item.isVerified ? "已验证" : "未验证"}}</text>
+            <text class='tip-location'>{{item.locationAddress}}</text>
+          </view>
+
+          <view class='tip-row-3'>
+            <image class="tip-image" wx:if="{{item.picPath != null && item.picPath.length >0}}" mode="aspectFit" src="{{item.picPath[0]}}"></image>
+            <video class="tip-video" wx:if="{{item.videoPath.length > 0}}" objectFit="fill" src="{{item.videoPath}}"></video>
+            <view class='tip-content'>{{item.content}}</view>
+          </view>
+
+          <view class="tip-row-4">
+            <view class="tip-type-and-time">
+              <text class='tip-type'>{{item.tipType}} </text>
+              <text class='tip-time'>{{item.created_at}}</text>
+            </view>
+            
+            <view class="tip-follow-btn-box">
+              <button class='tip-follow-btn' catchtap='catchFollow' data-tip='{{item}}'>关注</button>
+            </view>
+          </view>
+
+        </view>
+
+      </block>
     </swiper-item>
 
     <swiper-item>
