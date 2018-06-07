@@ -1,1 +1,33 @@
 /* tasksDetail/tasksDetail.wxss */
+page{
+  background: #efefef;
+}
+.container{
+  padding: 0 40rpx;
+  background:#efefef;
+  padding-top:20rpx;
+}
+.task-list-row {
+  padding:20rpx;
+  background:#fff;
+  border: 1rpx solid #fff;
+  margin:40rpx 0;  
+}
+.task-list-content{
+  margin:20rpx 0;
+}
+.task-list-footer{
+  margin:40rpx 0;
+}
+.task-list-type{
+
+  padding:5rpx;
+  border:1rpx solid #000;
+  font-size:16px;
+  color:#000;
+  margin-right:20rpx;
+}
+.submitButton{
+  margin-top:100rpx;
+  margin-bottom:50rpx;
+}
