@@ -1,5 +1,22 @@
 /* tasks/tasks.wxss */
+.container{
+
+  padding: 0 40rpx;
+  background:#efefef;
+  padding-top:20rpx;
+}
 .task-list-row {
-  height: 75px;
-  font-size: 20;
+  padding:20rpx;
+  background:#fff;
+  border: 1rpx solid #fff;
+  margin:40rpx 0;  
+}
+.task-list-footer{
+  margin:5rpx 0;
+}
+.task-list-type{
+  padding:5rpx;
+  border:1rpx solid #000;
+  font-size:16px;
+  color:#000;
 }
