@@ -26,3 +26,7 @@ button[size="mini"]{
   font-size:16px;
   margin-bottom:10rpx;
 }
+
+.picker {
+  width: 100%;
+}

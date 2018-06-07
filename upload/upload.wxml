@@ -1,11 +1,12 @@
 <view class="container">
   <form bindsubmit='formSubmit' bindreset='formReset'>
     <view class=' form-item'>
+
       <picker bindchange='bindPickerChange' range='{{typeArr}}' name='picker' value='{{pickerIndex}}'>
         <text class="typePicker-text">tip类型:</text>
-        <input value="{{typeArr[pickerIndex]}}" class='typePicker' placeholder='请点击此处'></input>
-
+        <text class='typePicker' placeholder='请点击此处'>{{typeArr[pickerIndex]}}</text>
       </picker>
+
     </view>
     <view class=' form-item'>
       <textarea class='tipContent' placeholder='请输入tip的内容' maxlength='-1' name='input'>
