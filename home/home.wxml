@@ -17,11 +17,7 @@
 
           <view class='tip-row-1'>
             <!-- <image></image>    -->
-            <!-- <text class="tip-title">何文辉等500人关注了</text> -->
-            <view class="user-avatar">
-              <open-data type="userAvatarUrl"></open-data>
-            </view>
-            <open-data type="userNickName" class="tip-title"></open-data>
+             <text class="tip-title">{{item.locationName}}附近</text> 
           </view>
 
           <view class="tip-row-2">
@@ -51,28 +47,74 @@
       </block>
     </swiper-item>
 
-    <swiper-item>
-      <scroll-view scroll-y='{{true}}' bindscrolltoupper='onPullDownRefresh' bindscrolltolower='onReachBottom'>
-        <block wx:for="{{myFollowData}}" wx:for-item="item" wx:for-index="index" wx:key="id">
-          <view class='follow-row' bindtap='showDetail' data-tip='{{item}}' style="height:{{listRowHeight}}px">
-            <text class='tipType'>{{index}}tip种类：{{item.tipType}} </text>
-            <text class='tipContent'>tip内容：{{item.content}}</text>
+<swiper-item style="position:relative">
+      <wxs src="time.wxs" module="time" />
+      <block wx:for="{{myFollowData}}" wx:for-item="item" wx:for-index="index">
+        <view class='tip-row' catchtap='showDetail' data-tip='{{item}}' style="min-height:{{listRowHeight}}px" >
+
+          <view class='tip-row-1'>
+            <!-- <image></image>    -->
+             <text class="tip-title">{{item.locationName}}附近</text> 
           </view>
-        </block>
-      </scroll-view>
-    </swiper-item>
 
-    <swiper-item>
+          <view class="tip-row-2">
+            <text class='tip-verify'>{{item.isVerified ? "已验证" : "未验证"}}</text>
+            <text class='tip-location'>{{item.locationAddress}}</text>
+          </view>
 
-      <!--第一页已经验证的tip  -->
-      <block wx:for="{{recommendTipData}}" wx:for-item="item" wx:for-index="index" wx:key="id">
-        <view class='recommend-row' bindtap='showDetail' data-tip='{{item}}' style="height:{{listRowHeight}}px">
-          <text class='tipType'>{{index}}tip种类：{{item.tipType}} </text>
-          <text class='tipContent'>tip内容：{{item.content}}</text>
-          <button class='followBtn' catchtap='catchFollow' data-tip='{{item}}'>关注</button>
+          <view class='tip-row-3'>
+            <image class="tip-image" wx:if="{{item.picPath != null && item.picPath.length >0}}" mode="aspectFit" src="{{item.picPath[0]}}"></image>
+            <video class="tip-video" wx:if="{{item.videoPath.length > 0}}" objectFit="fill" src="{{item.videoPath}}"></video>
+            <view class='tip-content'>{{item.content}}</view>
+          </view>
+
+          <view class="tip-row-4">
+            <view class="tip-type-and-time">
+              <text class='tip-type'>{{item.tipType}} </text>
+              <text class='tip-time'>{{time.parse(item.created_at)}}</text>
+            </view>
+          </view>
+
         </view>
-      </block>
 
+      </block>
+    </swiper-item>
+ 
+    <swiper-item style="position:relative">
+      <wxs src="time.wxs" module="time" />
+      <block wx:for="{{recommendTipData}}" wx:for-item="item" wx:for-index="index">
+        <view class='tip-row' catchtap='showDetail' data-tip='{{item}}' style="min-height:{{listRowHeight}}px" >
+
+          <view class='tip-row-1'>
+            <!-- <image></image>    -->
+             <text class="tip-title">{{item.locationName}}附近</text> 
+          </view>
+
+          <view class="tip-row-2">
+            <text class='tip-verify'>{{item.isVerified ? "已验证" : "未验证"}}</text>
+            <text class='tip-location'>{{item.locationAddress}}</text>
+          </view>
+
+          <view class='tip-row-3'>
+            <image class="tip-image" wx:if="{{item.picPath != null && item.picPath.length >0}}" mode="aspectFit" src="{{item.picPath[0]}}"></image>
+            <video class="tip-video" wx:if="{{item.videoPath.length > 0}}" objectFit="fill" src="{{item.videoPath}}"></video>
+            <view class='tip-content'>{{item.content}}</view>
+          </view>
+
+          <view class="tip-row-4">
+            <view class="tip-type-and-time">
+              <text class='tip-type'>{{item.tipType}} </text>
+              <text class='tip-time'>{{time.parse(item.created_at)}}</text>
+            </view>
+            
+            <view class="tip-follow-btn-box">
+              <button class='tip-follow-btn' catchtap='catchFollow' data-tip='{{item}}'>关注</button>
+            </view>
+          </view>
+
+        </view>
+
+      </block>
     </swiper-item>
   </swiper>
 </view>
