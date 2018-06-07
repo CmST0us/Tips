@@ -8,7 +8,8 @@ Page({
   data: {
     tipData: {},
     isApply: false,
-    btnWord: '申请验证'
+    btnWord: '申请验证',
+    markers: []
   },
 
   /**
@@ -25,6 +26,12 @@ Page({
     tip.get(tipID).then(function (res) {
       wx.hideLoading();
       that.setData({ tipData: res.data });
+      that.setData({
+        markers: [{
+          latitude: res.data.position.coordinates[1],
+          longitude: res.data.position.coordinates[0]
+        }]
+      })
       let uid = wx.BaaS.storage.get('uid');
       console.log(uid);
       console.log(res.data.position.coordinates);

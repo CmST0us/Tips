@@ -1,5 +1,4 @@
 <view class='container'>
-  
   <view class="title">
     <text class='title-text'>{{tipData.tipType}}</text>
   </view>
@@ -17,7 +16,7 @@
   </view>
 
   <view class="info">
-    <map id='info-map' latitude='{{tipData.position.coordinates[1]}}' longitude='{{tipData.position.coordinates[0]}}' scale='16' show-location='{{true}}'></map>
+    <map id='info-map' latitude='{{tipData.position.coordinates[1]}}' longitude='{{tipData.position.coordinates[0]}}' scale='16' markers='{{markers}}' show-location='{{true}}'></map>
     <text class='info-location-text'>{{tipData.locationName}}</text>
   </view>
 

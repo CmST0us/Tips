@@ -22,6 +22,7 @@ Page({
     picUrls: [],
     picSrcLength: 0,
     haveBeenUpdated: false,
+    markers: []
   },
 
   /**
@@ -283,7 +284,13 @@ Page({
           name: res.name,
           address: res.address
         }
-        that.setData({ position: position });
+        that.setData({ 
+          position: position,
+          markers: [{
+            latitude: latitude,
+            longitude: longitude
+          }]
+        });
       },
       fail: function (err) {
         console.log(err);

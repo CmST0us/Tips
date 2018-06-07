@@ -3,7 +3,7 @@
     <view class="task-list-content">
       <text>{{tipData.content}}</text>
     </view>
-    <map id='map' scale='16' longitude='{{tipData.position.coordinates[0]}}' latitude='{{tipData.position.coordinates[1]}}' show-location='{{true}}'></map>
+    <map id='map' scale='16' longitude='{{tipData.position.coordinates[0]}}' latitude='{{tipData.position.coordinates[1]}}' markers="{{markers}}" show-location='{{true}}'></map>
 
     <view class="task-list-footer">
       <text class='task-list-type'>{{tipData.tipType}}</text>

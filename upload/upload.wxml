@@ -27,7 +27,7 @@
 
     <view class=' form-item'>
       <text class='currentLocation'>当前位置：{{position.name}}</text>
-      <map class='locationChooser' bindtap='bindChooseLocation' longitude='{{position.longitude}}' latitude='{{position.latitude}}' scale='16' show-location='{{true}}'></map>
+      <map class='locationChooser' bindtap='bindChooseLocation' longitude='{{position.longitude}}' latitude='{{position.latitude}}' markers='{{markers}}' scale='16' show-location='{{true}}'></map>
     </view>
 
 

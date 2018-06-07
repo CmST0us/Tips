@@ -14,7 +14,8 @@ Page({
     checkBtnWord: '验证通过',
     failBtnWord: '无效',
     isFromHome: true,
-    isFailed: false
+    isFailed: false,
+    markers: []
   },
 
   /**
@@ -49,7 +50,13 @@ Page({
         });
       })
     } 
-    that.setData({ tipData: tip });
+    that.setData({ 
+      tipData: tip,
+      markers: [{
+        latitude: tip.position.coordinates[1],
+        longitude: tip.position.coordinates[0]
+      }]
+    });
     if(this.data.isFromHome){
       let tipTableObject = new wx.BaaS.TableObject(app.globalData.tableID.tips);
       tipTableObject.get(tip.id).then(function(res){
