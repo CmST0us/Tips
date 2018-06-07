@@ -1,36 +1,43 @@
 <view class="container">
   <form bindsubmit='formSubmit' bindreset='formReset'>
-    <view class='typePickerView'>
-      <text class='pickerText'>请选择您要提交的tip的种类：</text>
-      <picker class='typePicker' bindchange='bindPickerChange' range='{{typeArr}}' name='picker' value='{{pickerIndex}}'>
-        <view class="picker">
-         <input value="{{typeArr[pickerIndex]}}" class='pickerInput' placeholder='请点击此处'></input>
-        </view>
+    <view class=' form-item'>
+      <picker bindchange='bindPickerChange' range='{{typeArr}}' name='picker' value='{{pickerIndex}}'>
+        <text class="typePicker-text">tip类型:</text>
+        <input value="{{typeArr[pickerIndex]}}" class='typePicker' placeholder='请点击此处'></input>
+
       </picker>
     </view>
-    <view class='tipContentView'>
+    <view class=' form-item'>
       <textarea class='tipContent' placeholder='请输入tip的内容' maxlength='-1' name='input'>
       </textarea>
     </view>
-    <view class='mediaSelectionView'>
-      <view class='picSelectionView'>
-        <text class='picSelectionText' bindtap='selectPics'>选择图片</text>
-        <block class='imageView' wx:if='{{isPicSelected}}' wx:for='{{picSrc}}'>
-          <image src='{{item}}'></image>
-        </block>
-      </view>
-      <view class='videoSelectionView'>
-        <text class='videoSelectionText' bindtap='selectVideo'>选择视频</text>
-        <video src='{{videoSrc}}' wx:if='{{isVideoSelected}}'></video>
-      </view>
+
+    <view class=' form-item'>
+      <button bindtap='selectPics' type="primary" size="mini">选择图片</button>
+      <block class='imageView' wx:if='{{isPicSelected}}' wx:for='{{picSrc}}'>
+        <image src='{{item}}'></image>
+      </block>
     </view>
-    <view class='lcContainer'>
+
+    <view class=' form-item'>
+      <button bindtap='selectVideo' type="primary" size="mini">选择视频</button>
+      <video src='{{videoSrc}}' wx:if='{{isVideoSelected}}'></video>
+    </view>
+
+    <view class=' form-item'>
       <text class='currentLocation'>当前位置：{{position.name}}</text>
       <map class='locationChooser' bindtap='bindChooseLocation' longitude='{{position.longitude}}' latitude='{{position.latitude}}' scale='16' show-location='{{true}}'></map>
     </view>
-    <view class="btn-area">
-      <button formType="submit" class='btn'>提交</button>
-      <button formType="reset" class='btn'>重置</button>
+
+
+    <view>
+      <view class="btns">
+        <button formType="submit" type="primary" size="mini">提交</button>
+        <button formType="reset" type="danger" size="mini">重置</button>
+      </view>
+
     </view>
+
   </form>
+
 </view>

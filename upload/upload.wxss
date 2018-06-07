@@ -1,39 +1,28 @@
 /* upload/upload.wxss */
 .container{
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  bottom: 0px;
-  left: 0;
-  right: 0;
+  padding: 0 40rpx;
+  background:#efefef;
+  padding-top:20rpx;
 }
 
-.typePickerView{
-  display: flex;
-  align-items: center;
+.form-item{
+  margin:20rpx 0;
+  background: #fff;
+  padding:40rpx;
+  font-size:16px;
 }
 
-.pickerText{
-  font-size: 35rpx;
+.typePicker{
+  display:inline-block;
+  margin-left:50rpx;
+  padding:0;
 }
-
-.pickerInput{
-  font-size: 35rpx;
-  width: 200rpx;
+.btns{
+  width:300rpx;
+  margin: 0 auto;
+  padding:20rpx 0;
 }
-
-.tipContentView{
-  margin-top: 10%;
-  height: 50%;
-}
-
-.btn-area{
-  display: flex;
-  justify-content: flex-start;
-}
-
-.btn{
-  width: 25%;
-  height: 20%;
+button[size="mini"]{
+  font-size:16px;
+  margin-bottom:10rpx;
 }
