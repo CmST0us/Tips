@@ -1,1 +1,70 @@
 /* detail/detail.wxss */
+
+.container {
+  padding-top: 38px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 38px;
+}
+
+.title-text {
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.content {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1rpx #777 solid;
+}
+
+.content-text {
+  font-weight: lighter;
+  word-break: break-all;
+}
+
+.content-image {
+  width: 100%;
+}
+
+.content-video {
+  widows: 100%;
+}
+
+.info {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.info-location-text {
+  font-size: 14px;
+  font-weight: normal;
+  color: #777;
+}
+
+#info-map {
+  width: 100%;
+}
+
+.action {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.followBtn {
+  width: 41%;
+  margin: 4px;
+  box-sizing: border-box;
+}
+
+.checkBtn {
+  width: 41%;
+  margin: 4px;
+}
+
+.failBtn {
+  width: 41%;
+  margin: 4px;
+}

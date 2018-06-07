@@ -1,10 +1,30 @@
 <view class='container'>
-  <text class='tipType'>{{tipData.tipType}}</text>
-  <text class='content'>{{tipData.content}}</text>
-  <text class='locationName'>地名：{{tipData.locationName}}</text>
-  <map id='map' latitude='{{tipData.position.coordinates[1]}}' longitude='{{tipData.position.coordinates[0]}}' scale='16' show-location='{{true}}'></map>
-  <text class='locationAddress'>位置：{{tipData.locationAddress}}</text>
-  <button class='followBtn' bindtap='bindFollow'>{{btnWord}}</button>
-  <button class='checkBtn'  bindtap='bindCheck' wx:if='{{isFromMy}}' disabled='{{isVerified}}'>{{checkBtnWord}}</button>
-  <button class='failBtn' wx:if="{{isFromHome}}" bindtap='bindFail' data-id='{{tipData.id}}' disabled='{{isFailed}}'>{{failBtnWord}}</button>
+  
+  <view class="title">
+    <text class='title-text'>{{tipData.tipType}}</text>
+  </view>
+
+  <view class="content">
+    <text class='content-text'>{{tipData.content}}</text>
+    
+    <view class="content-image-list" wx:if="{{tipData.picPath != null && tipData.picPath.length > 0}}">
+        <block wx:for="{{tipData.picPath}}">  
+        <image class="content-image" mode="aspectFit" src="{{item}}"></image>
+        </block>  
+    </view> 
+
+    <video class="content-video" wx:if="{{tipData.videoPath != null && tipData.videoPath.length > 0}}"></video>
+  </view>
+
+  <view class="info">
+    <map id='info-map' latitude='{{tipData.position.coordinates[1]}}' longitude='{{tipData.position.coordinates[0]}}' scale='16' show-location='{{true}}'></map>
+    <text class='info-location-text'>{{tipData.locationName}}</text>
+  </view>
+
+  <view class="action">
+    <button class='checkBtn'  bindtap='bindCheck' wx:if='{{isFromMy}}' disabled='{{isVerified}}'>{{checkBtnWord}}</button>
+    <button class='failBtn' wx:if="{{isFromHome}}" bindtap='bindFail' data-id='{{tipData.id}}' disabled='{{isFailed}}'>{{failBtnWord}}</button>
+    <button class='followBtn' bindtap='bindFollow'>{{btnWord}}</button>
+  </view>
+
 </view>
