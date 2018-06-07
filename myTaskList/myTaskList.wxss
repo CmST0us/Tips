@@ -1,5 +1,33 @@
-/* myTaskList/myTaskList.wxss */
-.my-task-list-row {
-  height: 75px;
-  font-size: 15;
+/* tasks/tasks.wxss */
+page{
+    background:#efefef;
+}
+.container{
+  padding: 20rpx 40rpx;
+
+}
+.task-list-row {
+  padding:20rpx;
+  background:#fff;
+  border: 1rpx solid #fff;
+  margin:40rpx 0;  
+}
+.task-list-footer{
+  margin:20rpx 0;
+}
+.task-list-type{
+  display: inline-block;
+  padding:5rpx 10rpx;
+  border:1rpx solid #000;
+  font-size:16px;
+  color:#000;
+  margin: 0 10rpx;
+}
+
+.yes{
+  color:#1afa29;
+}
+
+.no{
+  color:#bdbdbd;
 }
