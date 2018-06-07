@@ -218,6 +218,10 @@ Page({
         });
       })
     } else if (that.data.videoSrc.length == 0 && that.data.picSrc.length == 0) {
+      that.setData({
+        content: e.detail.value["input"],
+        index: e.detail.value["picker"]
+      });
       that.createTableObjectAndUpdate();
     }
 
