@@ -278,9 +278,21 @@ Page({
         });
       }
     }, function(err){
-
+      console.log(err);
+      wx.showToast({
+        title: '网络故障',
+        image: '../image/netError.png'
+      });
     })
-
+  },
+  bindNavigation: function (e) {
+    let that = this;
+    wx.openLocation({
+      latitude: that.data.tipData.position.coordinates[1],
+      longitude: that.data.tipData.position.coordinates[0],
+      name: that.data.tipData.locationName,
+      address: that.data.tipData.locationAddress
+    });
   },
 
   /**
