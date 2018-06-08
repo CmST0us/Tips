@@ -10,7 +10,8 @@ page{
   padding:20rpx;
   background:#fff;
   border: 1rpx solid #fff;
-  margin:40rpx 0;  
+  margin:40rpx 0; 
+  position: relative; 
 }
 .task-list-footer{
   margin:20rpx 0;
@@ -30,4 +31,30 @@ page{
 
 .no{
   color:#bdbdbd;
+}
+
+.numText {
+  color: #a2a2a2;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.participatorsNumView {
+  position: absolute;
+  right: 20rpx;
+  top: 100rpx;
+}
+
+.locationText {
+  color: #a2a2a2;
+  font-weight: bold;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  width: 50%;
+}
+
+.locationView {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
 }
