@@ -12,7 +12,7 @@
 
     <swiper-item style="position:relative">
       <wxs src="time.wxs" module="time" />
-      <block wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index">
+      <block wx:if="{{tipData.length > 0}}" wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index">
         <view class='tip-row' catchtap='showDetail' data-tip='{{item}}' style="min-height:{{listRowHeight}}px" >
 
           <view class='tip-row-1'>
@@ -45,11 +45,18 @@
         </view>
 
       </block>
+
+      <block wx:if="{{tipData.length == 0}}">
+        <view class="no-tip-notify">
+        <text class="no-tip-notify-text">这附近还没有tips，您可以自行创建</text>
+        </view>
+      </block>
+
     </swiper-item>
 
 <swiper-item style="position:relative">
       <wxs src="time.wxs" module="time" />
-      <block wx:for="{{myFollowData}}" wx:for-item="item" wx:for-index="index">
+      <block wx:if="{{myFollowData.length > 0}}" wx:for="{{myFollowData}}" wx:for-item="item" wx:for-index="index">
         <view class='tip-row' catchtap='showDetail' data-tip='{{item}}' style="min-height:{{listRowHeight}}px" >
 
           <view class='tip-row-1'>
@@ -76,13 +83,17 @@
           </view>
 
         </view>
-
+      </block>
+      <block wx:if="{{myFollowData.length == 0}}">
+        <view class="no-tip-notify">
+        <text class="no-tip-notify-text">这附近还没有tips，您可以自行创建</text>
+        </view>
       </block>
     </swiper-item>
  
     <swiper-item style="position:relative">
       <wxs src="time.wxs" module="time" />
-      <block wx:for="{{recommendTipData}}" wx:for-item="item" wx:for-index="index">
+      <block wx:if="{{recommendTipData.length > 0}}" wx:for="{{recommendTipData}}" wx:for-item="item" wx:for-index="index">
         <view class='tip-row' catchtap='showDetail' data-tip='{{item}}' style="min-height:{{listRowHeight}}px" >
 
           <view class='tip-row-1'>
@@ -113,7 +124,11 @@
           </view>
 
         </view>
-
+      </block>
+      <block wx:if="{{recommendTipData.length == 0}}">
+        <view class="no-tip-notify">
+        <text class="no-tip-notify-text">这附近还没有tips，您可以自行创建</text>
+        </view>
       </block>
     </swiper-item>
   </swiper>

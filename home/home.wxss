@@ -20,7 +20,7 @@
 }  
 
 .swiper {  
-  background: #ddd;  
+  background: #eaeaea;  
   position:relative;
 }  
 swiper-item{
@@ -30,7 +30,16 @@ swiper-item{
   color: #000;  
 
 } 
-
+.no-tip-notify {
+  width: 100%;
+  text-align: center;
+  margin-top: 28px;
+}
+.no-tip-notify-text {
+  color: #a2a2a2;
+  font-weight: bold;
+  font-size: 14px;
+}
 /*Row Cell Style  */
 .follow-row {
   background-color: white;
