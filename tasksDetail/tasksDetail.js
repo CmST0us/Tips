@@ -132,6 +132,15 @@ Page({
       });
     })
   },
+  bindNavigation: function (e) {
+    let that = this;
+    wx.openLocation({
+      latitude: that.data.tipData.position.coordinates[1],
+      longitude: that.data.tipData.position.coordinates[0],
+      name: that.data.tipData.locationName,
+      address: that.data.tipData.locationAddress
+    });
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
