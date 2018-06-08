@@ -27,8 +27,8 @@
       {
         "pagePath": "upload/upload",
         "text": "新建",
-        "iconPath": "image/upload.png",
-        "selectedIconPath": "image/upload2.png"
+        "iconPath": "image/new.png",
+        "selectedIconPath": "image/new1.png"
       },
       {
         "pagePath": "tasks/tasks",
