@@ -1,28 +1,59 @@
 /* tasks/tasks.wxss */
-.container{
 
+.container {
   padding: 0 40rpx;
-  background:#efefef;
-  padding-top:20rpx;
+  background: #efefef;
+  padding-top: 20rpx;
 }
+
 .task-list-row {
   padding-left: 24px;
   padding-right: 24px;
   padding-top: 12px;
   padding-bottom: 12px;
-  background:#fff;
+  background: #fff;
   border: 1rpx solid #ddd;
-  margin:18rpx 0;  
+  margin: 18rpx 0;
+  position: relative;
 }
 
-.task-list-type{
-  font-size:14px;
-  color:#000;
+.task-list-type {
+  font-size: 14px;
+  color: #000;
 }
+
 .tipContent {
   font-weight: bold;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   overflow: hidden;
   -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  width: 50%;
+}
+
+.numText {
+  color: #a2a2a2;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.participatorsNumView {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+}
+
+.locationText {
+  color: #a2a2a2;
+  font-weight: bold;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  width: 50%;
+}
+
+.locationView {
+  position: absolute;
+  right: 20rpx;
+  top: 80rpx;
 }

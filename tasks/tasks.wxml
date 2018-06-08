@@ -6,6 +6,12 @@
             <view class="task-list-footer">
                 <text class='task-list-type'>{{item.tipType}}</text>
             </view>
+            <view class='participatorsNumView'>
+              <text class='numText'>申请人数：{{item.participantID.length}}人</text>
+            </view>
+            <view class='locationView'>
+              <text class='locationText'>地址：{{item.locationName}}</text>
+            </view>
     </view>
   </block>
 </view>
