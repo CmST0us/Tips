@@ -6,8 +6,8 @@
     <map id='map' scale='16' longitude='{{tipData.position.coordinates[0]}}' latitude='{{tipData.position.coordinates[1]}}' markers="{{markers}}" show-location='{{true}}' bindtap='bindNavigation'></map>
 
     <view class="task-list-footer">
-      <text class='task-list-type'>{{tipData.tipType}}</text>
-      <text class='task-list-type'>{{tipData.participantID.length}}人</text>
+      <text class='task-list-type'>tip类型：{{tipData.tipType}}</text>
+      <text class='task-list-type'>当前申请人数：{{tipData.participantID.length}}人</text>
     </view>
     <button bindtap='participateTask' class='submitButton' type="primary" disabled='{{tipData.participantID.length >= 10 || isApply}}'>{{btnWord}}</button>
   </view>
