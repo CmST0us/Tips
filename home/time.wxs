@@ -1,7 +1,9 @@
 // 输入时间戳， 返回格式化后的时间
 module.exports.parse = function(iostime) {
-  // var iostimeNum = parseInt(iostime);
-  // var t = new Date(iostimeNum);
-  // return t.toLocaleString();
+  var time = getDate(iostime * 1000);
+  var year = time.getFullYear() + '.';
+  var month = time.getMonth() + '.';
+  var days = time.getDate();
+  iostime = year + month + days;
   return iostime;
 }
