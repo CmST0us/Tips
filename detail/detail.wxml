@@ -1,6 +1,10 @@
 <view class='container'>
   <view class="title">
-    <text class='title-text'>{{tipData.tipType}}</text>
+    <text class='title-text'>{{tipData.locationName}}附近</text>
+  </view>
+
+  <view class="tip-type">
+    <text class="tip-type-text">{{tipData.tipType}}</text>
   </view>
 
   <view class="content">
@@ -17,7 +21,7 @@
 
   <view class="info">
     <map id='info-map' latitude='{{tipData.position.coordinates[1]}}' longitude='{{tipData.position.coordinates[0]}}' scale='16' markers='{{markers}}' show-location='{{true}}'></map>
-    <text class='info-location-text'>{{tipData.locationName}}</text>
+    <text class='info-location-text'>{{tipData.locationAddress}}</text>
   </view>
 
   <view class="action">
