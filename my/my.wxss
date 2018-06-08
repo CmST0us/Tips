@@ -7,10 +7,10 @@
   text-align: center;
 }
 .avatarImg{
-  width:200rpx;
-  height:200rpx;
+  width:150rpx;
+  height:150rpx;
   overflow: hidden;
-  border-radius: 100rpx;
+  border-radius: 75rpx;
   display:block;
   margin:0 auto;
 }
@@ -29,10 +29,13 @@
   margin:20rpx 0 ;
   border-bottom:1rpx solid #ddd;
   padding:20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .icon{
-  width:48rpx;
-  height:48rpx;
-  display:inline-block;
+  width: 28px;
+  height: 28px;
+  display: inline-block;
   margin-right:10rpx;
 }
