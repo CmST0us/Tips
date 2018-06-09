@@ -16,7 +16,7 @@
     <view class=' form-item'>
       <button bindtap='selectPics' type="primary" size="mini">选择图片</button>
       <block class='imageView' wx:if='{{isPicSelected}}' wx:for='{{picSrc}}'>
-        <image src='{{item}}'></image>
+        <image src='{{item}}' mode='center'></image>
       </block>
     </view>
 
