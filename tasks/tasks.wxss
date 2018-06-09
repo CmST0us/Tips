@@ -1,5 +1,9 @@
 /* tasks/tasks.wxss */
 
+page{
+  background-color: #efefef;
+}
+
 .container {
   padding: 0 40rpx;
   background: #efefef;
