@@ -22,9 +22,12 @@
 .swiper {  
   background: #eaeaea;  
   position:relative;
+  display: block;
+  overflow: hidden;
 }  
 swiper-item{
   z-index:999;
+  
 }
 .on {  
   color: #000;  
