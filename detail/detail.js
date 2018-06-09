@@ -49,24 +49,24 @@ Page({
           image: '../image/netError.png'
         });
       })
-    } 
-    that.setData({ 
+    }
+    that.setData({
       tipData: tip,
       markers: [{
         latitude: tip.position.coordinates[1],
         longitude: tip.position.coordinates[0]
       }]
     });
-    if(this.data.isFromHome){
+    if (this.data.isFromHome) {
       let tipTableObject = new wx.BaaS.TableObject(app.globalData.tableID.tips);
-      tipTableObject.get(tip.id).then(function(res){
-        if (res.data.verifyNum == 0){
+      tipTableObject.get(tip.id).then(function (res) {
+        if (res.data.verifyNum == 0) {
           that.setData({
             isFailed: true,
             failBtnWord: '已经无效'
           });
         }
-      }, function(err){
+      }, function (err) {
         wx.showToast({
           title: '网络故障',
           image: '../image/netError.png'
@@ -135,10 +135,10 @@ Page({
             })
           } else {
             let verifiedTipsRec = verifiedTableObject.create();
-            verifiedTipsRec.set({ verifiedTips: [tip.id]});
-            verifiedTipsRec.save().then(function(res){
+            verifiedTipsRec.set({ verifiedTips: [tip.id] });
+            verifiedTipsRec.save().then(function (res) {
               console.log(res);
-            }, function(err){
+            }, function (err) {
               wx.showToast({
                 title: '网络故障',
                 image: '../image/netError.png'
@@ -155,7 +155,7 @@ Page({
             image: '../image/netError.png'
           });
         })
-        
+
       }, function (saveErr) {
         wx.showToast({
           title: '网络故障',
@@ -243,7 +243,7 @@ Page({
       });
     })
   },
-  bindFail: function(e){
+  bindFail: function (e) {
     let that = this;
     let id = e.currentTarget.dataset.id;
     console.log(id);
@@ -251,33 +251,33 @@ Page({
     wx.showLoading({
       title: '正在加载',
     });
-    tipTableObject.get(id).then(function(res){
+    tipTableObject.get(id).then(function (res) {
       wx.hideLoading();
-      if (res.data.verifyNum != 0){
+      if (res.data.verifyNum != 0) {
         let verifyNum = res.data.verifyNum - 1;
         let tipRecord = tipTableObject.getWithoutData(id);
-        tipRecord.set({ 
+        tipRecord.set({
           verifyNum: verifyNum,
-          isVerified: verifyNum == 0 ? false : true 
+          isVerified: verifyNum == 0 ? false : true
         });
-        tipRecord.update().then(function(saveRes){
+        tipRecord.update().then(function (saveRes) {
           that.setData({
             isFailed: saveRes.data.isVerified,
             failBtnWord: '已经无效'
           });
-        }, function(saveErr){
+        }, function (saveErr) {
           wx.showToast({
             title: '网络故障',
             image: '../image/netError.png'
           });
         })
-      }else{
+      } else {
         wx.showToast({
           title: '已经无效',
           image: '../image/commonErr.png'
         });
       }
-    }, function(err){
+    }, function (err) {
       console.log(err);
       wx.showToast({
         title: '网络故障',
@@ -294,7 +294,76 @@ Page({
       address: that.data.tipData.locationAddress
     });
   },
+  savePic: function (e) {
+    let itemList;
+    if(!!e.target.dataset.picpath){
+      itemList = ['保存图片到本地'];
+    } else {
+      itemList = ['保存视频到本地'];
+    }
+    console.log(e);
+    wx.showActionSheet({
+      itemList: itemList,
+      success: function (res) {
+        console.log(res);
+        if (res.tapIndex == 0) {
+          wx.downloadFile({
+            url: e.currentTarget.dataset.picpath,
+            success: function (res) {
+              console.log(res);
+              wx.saveImageToPhotosAlbum({
+                filePath: res.tempFilePath,
+                success: function (res) {
+                  console.log(res);
+                  wx.showToast({
+                    title: '保存成功',
+                    image: '../image/success.png'
+                  });
+                }
+              })
+            },
+            fail: function (err) {
+              console.log(err);
+              wx.showToast({
+                title: '网络故障',
+                image: '../image/netError.png'
+              });
+            }
+          })
+        } else {
+          wx.downloadFile({
+            url: e.currentTarget.dataset.videopath,
+            success: function(res){
+              wx.saveVideoToPhotosAlbum({
+                filePath: res.tempFilePath,
+                success: function(res){
+                  wx.showToast({
+                    title: '保存成功',
+                    image: '../image/success.png'
+                  });
+                },
+                fail: function(err){
+                  console.log(err);
+                  wx.showToast({
+                    title: '网络故障',
+                    image: '../imgae/netError.png'
+                  });
+                }
+              })
+            },
+            fail: function(err){
+              console.log(err);
+              wx.showToast({
+                title: '网络故障',
+                image: '../image/netError.png'
+              });
+            }
 
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

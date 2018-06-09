@@ -12,11 +12,11 @@
     
     <view class="content-image-list" wx:if="{{tipData.picPath != null && tipData.picPath.length > 0}}">
         <block wx:for="{{tipData.picPath}}">  
-        <image class="content-image" mode="aspectFit" src="{{item}}"></image>
+        <image class="content-image" mode="aspectFit" src="{{item}}" bindlongtap='savePic' data-picPath='{{item}}'></image>
         </block>  
     </view> 
 
-    <video class="content-video" wx:if="{{tipData.videoPath != null && tipData.videoPath.length > 0}}"></video>
+    <video class="content-video" data-videopath='{{tipData.videoPath}}' bindlongtap='savePic' wx:if="{{tipData.videoPath != null && tipData.videoPath.length > 0}}"></video>
   </view>
 
   <view class="info">
