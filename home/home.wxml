@@ -8,28 +8,22 @@
 
   </view>
 
-  <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:720px'>
+  <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{listSafeAreaHeight}}px'>
 
     <swiper-item style="position:relative">
       <wxs src="time.wxs" module="time" />
-      <scroll-view scroll-y>
+      <scroll-view scroll-y bindscrolltolower="onReachBottom" bindscrolltoupper="onPullDownRefresh" upper-threshold="0">
         <block wx:if="{{tipData.length > 0}}" wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index">
-          <view class='tip-row' catchtap='showDetail' data-tip='{{item}}' style="min-height:{{listRowHeight}}px" >
-
-            <view class='tip-row-1'>
-              <!-- <image></image>    -->
-              <text class="tip-title">{{item.locationName}}附近</text> 
+          <view class='tip-row' catchtap='showDetail' data-tip='{{item}}'>
+            <view class='tip-row-3'>
+              <image class="tip-image" wx:if="{{item.picPath != null && item.picPath.length >0}}" mode="aspectFill" src="{{item.picPath[0]}}"></image>
+              <!-- <video class="tip-video" wx:if="{{item.videoPath.length > 0}}" objectFit="fill" src="{{item.videoPath}}"></video> -->
+              <view class='tip-content'>{{item.content}}</view>
             </view>
 
             <view class="tip-row-2">
               <text class='tip-verify'>{{item.isVerified ? "已验证" : "未验证"}}</text>
               <text class='tip-location'>{{item.locationAddress}}</text>
-            </view>
-
-            <view class='tip-row-3'>
-              <image class="tip-image" wx:if="{{item.picPath != null && item.picPath.length >0}}" mode="aspectFit" src="{{item.picPath[0]}}"></image>
-              <video class="tip-video" wx:if="{{item.videoPath.length > 0}}" objectFit="fill" src="{{item.videoPath}}"></video>
-              <view class='tip-content'>{{item.content}}</view>
             </view>
 
             <view class="tip-row-4">
@@ -46,7 +40,7 @@
           </view>
         </block>
       </scroll-view>
-      
+
       <block wx:if="{{tipData.length == 0}}">
         <view class="no-tip-notify">
         <text class="no-tip-notify-text">这附近还没有tips，您可以自行创建</text>
@@ -57,34 +51,31 @@
 
 <swiper-item style="position:relative">
       <wxs src="time.wxs" module="time" />
-      <block wx:if="{{myFollowData.length > 0}}" wx:for="{{myFollowData}}" wx:for-item="item" wx:for-index="index">
-        <view class='tip-row' catchtap='showDetail' data-tip='{{item}}' style="min-height:{{listRowHeight}}px" >
-
-          <view class='tip-row-1'>
-            <!-- <image></image>    -->
-             <text class="tip-title">{{item.locationName}}附近</text> 
-          </view>
-
-          <view class="tip-row-2">
-            <text class='tip-verify'>{{item.isVerified ? "已验证" : "未验证"}}</text>
-            <text class='tip-location'>{{item.locationAddress}}</text>
-          </view>
-
-          <view class='tip-row-3'>
-            <image class="tip-image" wx:if="{{item.picPath != null && item.picPath.length >0}}" mode="aspectFit" src="{{item.picPath[0]}}"></image>
-            <video class="tip-video" wx:if="{{item.videoPath.length > 0}}" objectFit="fill" src="{{item.videoPath}}"></video>
-            <view class='tip-content'>{{item.content}}</view>
-          </view>
-
-          <view class="tip-row-4">
-            <view class="tip-type-and-time">
-              <text class='tip-type'>{{item.tipType}} </text>
-              <text class='tip-time'>{{time.parse(item.created_at)}}</text>
+      <scroll-view scroll-y bindscrolltolower="onReachBottom" bindscrolltoupper="onPullDownRefresh" upper-threshold="0">
+        <block wx:if="{{myFollowData.length > 0}}" wx:for="{{myFollowData}}" wx:for-item="item" wx:for-index="index">
+          <view class='tip-row' catchtap='showDetail' data-tip='{{item}}'>
+            <view class='tip-row-3'>
+              <image class="tip-image" wx:if="{{item.picPath != null && item.picPath.length >0}}" mode="aspectFill" src="{{item.picPath[0]}}"></image>
+              <!-- <video class="tip-video" wx:if="{{item.videoPath.length > 0}}" objectFit="fill" src="{{item.videoPath}}"></video> -->
+              <view class='tip-content'>{{item.content}}</view>
             </view>
-          </view>
 
-        </view>
-      </block>
+            <view class="tip-row-2">
+              <text class='tip-verify'>{{item.isVerified ? "已验证" : "未验证"}}</text>
+              <text class='tip-location'>{{item.locationAddress}}</text>
+            </view>
+
+            <view class="tip-row-4">
+              <view class="tip-type-and-time">
+                <text class='tip-type'>{{item.tipType}} </text>
+                <text class='tip-time'>{{time.parse(item.created_at)}}</text>
+              </view>
+            </view>
+
+          </view>
+        </block>
+      </scroll-view>
+
       <block wx:if="{{myFollowData.length == 0}}">
         <view class="no-tip-notify">
         <text class="no-tip-notify-text">这附近还没有tips，您可以自行创建</text>
@@ -94,38 +85,32 @@
  
     <swiper-item style="position:relative">
       <wxs src="time.wxs" module="time" />
-      <block wx:if="{{recommendTipData.length > 0}}" wx:for="{{recommendTipData}}" wx:for-item="item" wx:for-index="index">
-        <view class='tip-row' catchtap='showDetail' data-tip='{{item}}' style="min-height:{{listRowHeight}}px" >
-
-          <view class='tip-row-1'>
-            <!-- <image></image>    -->
-             <text class="tip-title">{{item.locationName}}附近</text> 
-          </view>
-
-          <view class="tip-row-2">
-            <text class='tip-verify'>{{item.isVerified ? "已验证" : "未验证"}}</text>
-            <text class='tip-location'>{{item.locationAddress}}</text>
-          </view>
-
-          <view class='tip-row-3'>
-            <image class="tip-image" wx:if="{{item.picPath != null && item.picPath.length >0}}" mode="aspectFit" src="{{item.picPath[0]}}"></image>
-            <video class="tip-video" wx:if="{{item.videoPath.length > 0}}" objectFit="fill" src="{{item.videoPath}}"></video>
-            <view class='tip-content'>{{item.content}}</view>
-          </view>
-
-          <view class="tip-row-4">
-            <view class="tip-type-and-time">
-              <text class='tip-type'>{{item.tipType}} </text>
-              <text class='tip-time'>{{time.parse(item.created_at)}}</text>
+      <scroll-view scroll-y bindscrolltolower="onReachBottom" bindscrolltoupper="onPullDownRefresh" upper-threshold="0">
+        <block wx:if="{{recommendTipData.length > 0}}" wx:for="{{recommendTipData}}" wx:for-item="item" wx:for-index="index">
+          <view class='tip-row' catchtap='showDetail' data-tip='{{item}}'>
+            <view class='tip-row-3'>
+              <image class="tip-image" wx:if="{{item.picPath != null && item.picPath.length >0}}" mode="aspectFill" src="{{item.picPath[0]}}"></image>
+              <!-- <video class="tip-video" wx:if="{{item.videoPath.length > 0}}" objectFit="fill" src="{{item.videoPath}}"></video> -->
+              <view class='tip-content'>{{item.content}}</view>
             </view>
-            
-            <view class="tip-follow-btn-box">
-              <button class='tip-follow-btn' catchtap='catchFollow' data-tip='{{item}}'>关注</button>
-            </view>
-          </view>
 
-        </view>
-      </block>
+            <view class="tip-row-2">
+              <text class='tip-verify'>{{item.isVerified ? "已验证" : "未验证"}}</text>
+              <text class='tip-location'>{{item.locationAddress}}</text>
+            </view>
+
+            <view class="tip-row-4">
+              <view class="tip-type-and-time">
+                <text class='tip-type'>{{item.tipType}} </text>
+                <text class='tip-time'>{{time.parse(item.created_at)}}</text>
+              </view>
+              
+            </view>
+
+          </view>
+        </block>
+      </scroll-view>
+
       <block wx:if="{{recommendTipData.length == 0}}">
         <view class="no-tip-notify">
         <text class="no-tip-notify-text">这附近还没有tips，您可以自行创建</text>

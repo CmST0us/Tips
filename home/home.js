@@ -12,8 +12,8 @@ Page({
     myFollowData: [],
     recommendTipData: [],
     currentTab: 0,
-    listRowHeight: 280,
-    swiperHeight: 0
+    listRowHeight: 300,
+    listSafeAreaHeight: 1080,
   },
   // 分页
   currentPage: 0,
@@ -33,6 +33,7 @@ Page({
    */
   onLoad: function (options) {
     this.fetchTipsAndShow();
+    this.updateSwiperHeight();
   },
 
   swichNav: function (e) {
@@ -66,29 +67,15 @@ Page({
     this.setData({
       currentTab: currentTabIndex,
     });
-
-    this.updateSwiperHeight();
   },
 
   updateSwiperHeight: function () {
-    var numberOfRow = 0;
-    var swiperHeight = app.globalData.systemInfo.windowHeight;
-    
-    if (this.data.currentTab == 0) {
-      numberOfRow = this.data.tipData.length;
-    } else if (this.data.currentTab == 1) {
-      numberOfRow = this.data.myFollowData.length;
-    } else if (this.data.currentTab == 2) {
-      numberOfRow = this.data.recommendTipData.length;
-    } 
+    var swiperHeight = app.globalData.systemInfo.windowHeight - 45;
 
-    let h = numberOfRow * (this.data.listRowHeight + 8);
-    if (h > swiperHeight) {
-      swiperHeight = h;
-    }
     this.setData({
-      swiperHeight: swiperHeight
+      listSafeAreaHeight: swiperHeight
     });
+
   },
 
   showDetail: function (e) {
@@ -110,7 +97,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.updateSwiperHeight();
+    
   },
 
   onMyFollowTipTabShow: function () {
@@ -172,7 +159,6 @@ Page({
       }
       let myFollow = that.data.myFollowData.concat(res.data.objects)
       that.setData({ myFollowData: myFollow });
-      that.updateSwiperHeight();
     }, err => {
       console.log(err);
     });
@@ -189,7 +175,6 @@ Page({
       this.setData({
         recommendTipData: res.data.objects
       });
-      that.updateSwiperHeight();
     }, err => {
       console.log(err);
     });
@@ -216,7 +201,6 @@ Page({
           var tipData = that.data.tipData;
           var concatData = tipData.concat(res.data.objects);
           that.setData({ tipData: concatData});
-          that.updateSwiperHeight();
         }, function (err) {
           console.log(err);
           wx.showToast({
@@ -319,24 +303,23 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () { 
-    console.log('pulldown')
-    this.setData({refreshing: true});
-    if (this.data.currentTab == 0) {
-      this.currentPage = 0;
+    var that = this;
+    that.setData({ refreshing: true });
+    if (that.data.currentTab == 0) {
+      that.currentPage = 0;
 
-      this.data.tipData = [];
-      this.fetchTipsAndShow();
-    } else if (this.data.currentTab == 1) {
-      this.myFollowCurrentPage = 0;
-      this.myFollowIds = [];
-      this.data.myFollowData = [];
-      this.fetchMyFollowIds(
-        this.fetchMyFollowDataAtCurrentPageAndRender
+      that.data.tipData = [];
+      that.fetchTipsAndShow();
+    } else if (that.data.currentTab == 1) {
+      that.myFollowCurrentPage = 0;
+      that.myFollowIds = [];
+      that.data.myFollowData = [];
+      that.fetchMyFollowIds(
+        that.fetchMyFollowDataAtCurrentPageAndRender
       )
-    } else if (this.data.currentTab == 2) {
-      this.fetchRecommendTipDataAndRender();
-    }
-    this.updateSwiperHeight();
+    } else if (that.data.currentTab == 2) {
+      that.fetchRecommendTipDataAndRender();
+    }  
     //wx.hideLoading();
   },
 
@@ -357,7 +340,6 @@ Page({
         this.fetchMyFollowDataAtCurrentPageAndRender();
       }
     }
-    this.updateSwiperHeight();
   },
 
   /**
