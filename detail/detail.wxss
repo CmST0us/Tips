@@ -83,3 +83,8 @@ video {
 map {
   width: 100%;
 }
+
+.action{
+  display: flex;
+  justify-content: center;
+}
