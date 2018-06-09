@@ -330,5 +330,14 @@ Page({
         });
       }
     });
+  },
+  previewPic: function(e){
+    wx.previewImage({
+      current: e.currentTarget.dataset.picpath,
+      urls: e.currentTarget.dataset.picpathlist,
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    });
   }
 })
