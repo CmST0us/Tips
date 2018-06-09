@@ -63,27 +63,35 @@ Page({
     let uid = wx.BaaS.storage.get('uid');
     let query = new wx.BaaS.Query();
     let that = this;
-    query.compare('isVerified', '=', false);
-    let tips = this.createTableObject(tableID, query, this.currentPage)
     wx.showLoading({
       title: '加载未验证tips',
     });
-    tips.find().then(function (res) {
-      if (res.data.meta.next == null) {
-        that.hasNext = false
-      } else {
-        that.hasNext = true
+    wx.getLocation({
+      success: function(res) {
+        let longitude = res.longitude;
+        let latitude = res.latitude;
+        let currentPoint = new wx.BaaS.GeoPoint(longitude, latitude);
+        query.compare('isVerified', '=', false);
+        query.withinCircle('position', currentPoint, 2);
+        let tips = that.createTableObject(tableID, query, that.currentPage)
+        tips.find().then(function (res) {
+          if (res.data.meta.next == null) {
+            that.hasNext = false
+          } else {
+            that.hasNext = true
+          }
+          wx.hideLoading();
+          let tipsData = that.data.tipsData.concat(res.data.objects)
+          that.setData({ tipsData: tipsData });
+        }, function (err) {
+          console.log(err);
+          wx.showToast({
+            title: '网络连接中断',
+            image: '../image/netError.png',
+            duration: 2000
+          });
+        });
       }
-      wx.hideLoading();
-      let tipsData = that.data.tipsData.concat(res.data.objects)
-      that.setData({ tipsData: tipsData });
-    }, function (err) {
-      console.log(err);
-      wx.showToast({
-        title: '网络连接中断',
-        image: '../image/netError.png',
-        duration: 2000
-      });
     })
   },
   /**
