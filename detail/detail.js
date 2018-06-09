@@ -364,6 +364,12 @@ Page({
       }
     })
   },
+  previewPic: function(e){
+    wx.previewImage({
+      urls: e.currentTarget.dataset.picpathlist,
+      current: e.currentTarget.dataset.picpath
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
