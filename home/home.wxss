@@ -34,9 +34,11 @@ swiper-item{
 
 } 
 .no-tip-notify {
+  position: absolute;
+  top: 20rpx;
   width: 100%;
   text-align: center;
-  margin-top: 28px;
+  margin-top: 28rpx;
 }
 .no-tip-notify-text {
   color: #a2a2a2;
