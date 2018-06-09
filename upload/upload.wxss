@@ -37,3 +37,8 @@ video {
 map {
   width: 100%;
 }
+
+.btns{
+  display: flex;
+  justify-content: center;
+}
