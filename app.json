@@ -2,7 +2,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Tips",
+    "navigationBarTitleText": "周边Tips",
     "navigationBarTextStyle": "black"
   },
   "pages": [
