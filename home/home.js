@@ -15,6 +15,9 @@ Page({
     listRowHeight: 300,
     listSafeAreaHeight: 1080,
   },
+  isTab1Loading: false,
+  isTab2Loading: false,
+  isTab3Loading: false,
   // 分页
   currentPage: 0,
   rowPerPage: 20,
@@ -32,7 +35,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.updateSwiperHeight();
+    this.fetchTipsAndShow();
   },
 
   swichNav: function (e) {
@@ -96,8 +100,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.fetchTipsAndShow();
-    this.updateSwiperHeight();
+    // this.fetchTipsAndShow();
+    // this.updateSwiperHeight();
   },
 
   onMyFollowTipTabShow: function () {
@@ -137,6 +141,7 @@ Page({
       }
       wx.hideLoading();
     }, err => {
+      that.isTab2Loading = false;
       wx.hideLoading();
       console.log(err);
     });
@@ -159,7 +164,9 @@ Page({
       }
       let myFollow = that.data.myFollowData.concat(res.data.objects)
       that.setData({ myFollowData: myFollow });
+      that.isTab2Loading = false;
     }, err => {
+      that.isTab2Loading = false;
       console.log(err);
     });
 
@@ -175,7 +182,9 @@ Page({
       this.setData({
         recommendTipData: res.data.objects
       });
+      that.isTab3Loading = false;
     }, err => {
+      that.isTab3Loading = false;
       console.log(err);
     });
   },
@@ -201,8 +210,10 @@ Page({
           var tipData = that.data.tipData;
           var concatData = tipData.concat(res.data.objects);
           that.setData({ tipData: concatData});
+          that.isTab1Loading = false;
         }, function (err) {
           console.log(err);
+          that.isTab1Loading = false;
           wx.showToast({
             title: '网络故障',
             image: '../image/netError.png'
@@ -305,21 +316,26 @@ Page({
   onPullDownRefresh: function () { 
     var that = this;
     that.setData({ refreshing: true });
-    if (that.data.currentTab == 0) {
+    if (that.data.currentTab == 0 && that.isTab1Loading == false) {
+      console.log("onPullDownRefresh");
       that.currentPage = 0;
-
+      that.isTab1Loading = true;
       that.data.tipData = [];
       that.fetchTipsAndShow();
-    } else if (that.data.currentTab == 1) {
+    } else if (that.data.currentTab == 1 && that.isTab2Loading == false) {
+      console.log("onPullDownRefresh");
       that.myFollowCurrentPage = 0;
       that.myFollowIds = [];
       that.data.myFollowData = [];
+      that.isTab2Loading = true;
       that.fetchMyFollowIds(
         that.fetchMyFollowDataAtCurrentPageAndRender
       )
-    } else if (that.data.currentTab == 2) {
+    } else if (that.data.currentTab == 2 && that.isTab3Loading == false) {
+      console.log("onPullDownRefresh");
+      that.isTab3Loading = true;
       that.fetchRecommendTipDataAndRender();
-    }  
+    }
     //wx.hideLoading();
   },
 
@@ -328,20 +344,28 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    console.log('reachbottom')
-    if (this.data.currentTab == 0) {
+    
+  },
+  onScrollViewReachBottom: function () {
+    if (this.data.currentTab == 0 && this.isTab1Loading == false) {
       if (this.hasNext == true) {
+        console.log('scrollViewReachBottom')
+        this.isTab1Loading = true;
         this.currentPage += 1;
         this.fetchTipsAndShow();
       }
-    } else if (this.data.currentTab == 1) {
+    } else if (this.data.currentTab == 1 && this.isTab2Loading == false) {
       if (this.myFollowHasNext == true) {
+        console.log('scrollViewReachBottom')
+        this.isTab2Loading = true;
         this.myFollowCurrentPage += 1;
         this.fetchMyFollowDataAtCurrentPageAndRender();
       }
     }
   },
-
+  onScrollViewReachTop: function () {
+    this.onPullDownRefresh();
+  },
   /**
    * 用户点击右上角分享
    */

@@ -12,7 +12,7 @@
 
     <swiper-item style="position:relative">
       <wxs src="time.wxs" module="time" />
-      <scroll-view scroll-y bindscrolltolower="onReachBottom" bindscrolltoupper="onPullDownRefresh" upper-threshold="0">
+      <scroll-view scroll-y bindscrolltolower="onScrollViewReachBottom" bindscrolltoupper="onScrollViewReachTop" lower-threshold="0">
         <block wx:if="{{tipData.length > 0}}" wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index">
           <view class='tip-row' catchtap='showDetail' data-tip='{{item}}'>
             <view class='tip-row-3'>
@@ -51,7 +51,7 @@
 
 <swiper-item style="position:relative">
       <wxs src="time.wxs" module="time" />
-      <scroll-view scroll-y bindscrolltolower="onReachBottom" bindscrolltoupper="onPullDownRefresh" upper-threshold="0">
+      <scroll-view scroll-y bindscrolltolower="onScrollViewReachBottom" bindscrolltoupper="onScrollViewReachTop" lower-threshold="0">
         <block wx:if="{{myFollowData.length > 0}}" wx:for="{{myFollowData}}" wx:for-item="item" wx:for-index="index">
           <view class='tip-row' catchtap='showDetail' data-tip='{{item}}'>
             <view class='tip-row-3'>
@@ -85,7 +85,7 @@
  
     <swiper-item style="position:relative">
       <wxs src="time.wxs" module="time" />
-      <scroll-view scroll-y bindscrolltolower="onReachBottom" bindscrolltoupper="onPullDownRefresh" upper-threshold="0">
+      <scroll-view scroll-y bindscrolltolower="onScrollViewReachBottom" bindscrolltoupper="onScrollViewReachTop" lower-threshold="0">
         <block wx:if="{{recommendTipData.length > 0}}" wx:for="{{recommendTipData}}" wx:for-item="item" wx:for-index="index">
           <view class='tip-row' catchtap='showDetail' data-tip='{{item}}'>
             <view class='tip-row-3'>
