@@ -1,0 +1,33 @@
+<view class='container'>
+  <view class="title">
+    <text class='title-text'>{{tipData.locationName}}附近</text>
+  </view>
+
+  <view class="tip-type">
+    <text class="tip-type-text">{{tipData.tipType}}</text>
+  </view>
+
+  <view class="content">
+    <text class='content-text'>{{tipData.content}}</text>
+    
+    <view class="content-image-list" wx:if="{{tipData.picPath != null && tipData.picPath.length > 0}}">
+        <block wx:for="{{tipData.picPath}}">  
+        <image class="content-image" mode="aspectFit" src="{{item}}" catchtap='previewPic' data-picpathlist='{{tipData.picPath}}' catchlongpress='savePic' data-picPath='{{item}}'></image>
+        </block>  
+    </view> 
+
+    <video class="content-video" data-videopath='{{tipData.videoPath}}' bindlongtap='savePic' wx:if="{{tipData.videoPath != null && tipData.videoPath.length > 0}}"></video>
+  </view>
+
+  <view class="info">
+    <map id='info-map' latitude='{{tipData.position.coordinates[1]}}' longitude='{{tipData.position.coordinates[0]}}' scale='16' markers='{{markers}}' show-location='{{true}}' bindtap='bindNavigation'></map>
+    <text class='info-location-text'>{{tipData.locationAddress}}</text>
+  </view>
+
+  <view class="action">
+    <button class='checkBtn'  bindtap='bindCheck' wx:if='{{isFromMy}}' disabled='{{isVerified}}'>{{checkBtnWord}}</button>
+    <button class='failBtn' wx:if="{{isFromHome}}" bindtap='bindFail' data-id='{{tipData.id}}' disabled='{{isFailed}}'>{{failBtnWord}}</button>
+    <button class='followBtn' bindtap='bindFollow'>{{btnWord}}</button>
+  </view>
+
+</view>
