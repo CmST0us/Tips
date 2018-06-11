@@ -12,7 +12,7 @@
     
     <view class="content-image-list" wx:if="{{tipData.picPath != null && tipData.picPath.length > 0}}">
         <block wx:for="{{tipData.picPath}}">  
-        <image class="content-image" mode="aspectFit" src="{{item}}" bindtap='previewPic' data-picpathlist='{{tipData.picPath}}' bindlongtap='savePic' data-picPath='{{item}}'></image>
+        <image class="content-image" mode="aspectFit" src="{{item}}" catchtap='previewPic' data-picpathlist='{{tipData.picPath}}' catchlongpress='savePic' data-picPath='{{item}}'></image>
         </block>  
     </view> 
 
