@@ -1,7 +1,11 @@
 <view class="container">
   <block wx:for="{{myTaskList}}" wx:for-item="item" wx:for-index="index" wx:key="id">
     <view class="task-list-row" bindtap='showDetail' data-tip='{{item}}'>
-      <text class='tipContent'>{{item.content}}</text>
+      <view class="task-list-row-1">
+        <text class='tipContent'>{{item.content}}</text>
+        <text class='locationText'>{{item.locationName}}</text>
+      </view>
+      
       <view class="task-list-footer">
         <text class='task-list-type'>{{item.tipType}}</text>
 
@@ -11,9 +15,6 @@
       </view>
       <view class='participatorsNumView'>
         <text class='numText'>申请人数：{{item.participantID.length}}人</text>
-      </view>
-      <view class='locationView'>
-        <text class='locationText'>地址：{{item.locationName}}</text>
       </view>
     </view>
   </block>
