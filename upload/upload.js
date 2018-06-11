@@ -165,6 +165,7 @@ Page({
       let metaData = { categoryName: 'SDK' }
       video.upload(fileParams, metaData).then(function (res) {
         console.log(res);
+
         that.setData({
           videoPath: res.data.path,
           content: e.detail.value["input"],
@@ -250,12 +251,18 @@ Page({
     let tipTableObject = new wx.BaaS.TableObject(app.globalData.tableID.tips);
     let tipTable = tipTableObject.create();
     tipTable.set(tip).save().then(function (res) {
+      wx.hideLoading();
       wx.showToast({
         title: '提交成功',
         image: '../image/success.png'
       });
     }, function (err) {
       console.log(err);
+      wx.hideLoading();
+      wx.showToast({
+        title: '网络故障',
+        image: '../image/netError.png'
+      });
     })
   },
   formReset: function () {

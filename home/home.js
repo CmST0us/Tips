@@ -1,5 +1,4 @@
 // home/home.js
-var amapFile = require('../libs/amap-wx.js');
 var app = getApp();
 Page({
 

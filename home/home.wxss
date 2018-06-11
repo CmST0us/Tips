@@ -64,11 +64,11 @@ swiper-item{
   background-color: white;
   margin:40rpx 30rpx; 
   padding-bottom: 22rpx;
-  border: 1rpx solid #ededed;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   box-sizing: border-box;
+  box-shadow: 2rpx 2rpx 3rpx gray;
 }
 .user-avatar {
   width: 40px;

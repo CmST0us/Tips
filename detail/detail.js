@@ -60,7 +60,7 @@ Page({
     if (this.data.isFromHome) {
       let tipTableObject = new wx.BaaS.TableObject(app.globalData.tableID.tips);
       tipTableObject.get(tip.id).then(function (res) {
-        if (res.data.verifyNum == 0) {
+        if (res.data.verifyNum == 0 && res.data.isVerified) {
           that.setData({
             isFailed: true,
             failBtnWord: '已经无效'
