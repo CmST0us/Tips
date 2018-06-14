@@ -13,6 +13,7 @@ Page({
     currentTab: 0,
     listRowHeight: 300,
     listSafeAreaHeight: 1080,
+    myFollowTipsID: [],
   },
   isTab1Loading: false,
   isTab2Loading: false,
@@ -34,6 +35,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let that = this;
     this.updateSwiperHeight();
     this.fetchTipsAndShow();
   },
@@ -101,6 +103,25 @@ Page({
   onShow: function () {
     // this.fetchTipsAndShow();
     // this.updateSwiperHeight();
+    let that = this;
+    that.setData({isFromUser: false});
+    let myFollowTipsTable = new wx.BaaS.TableObject(app.globalData.tableID.follow);
+    let uid = wx.BaaS.storage.get('uid');
+    let query = new wx.BaaS.Query();
+    query.compare('created_by', '=', uid);
+    myFollowTipsTable.setQuery(query).find().then(function (res) {
+      console.log(res);
+      that.setData({
+        myFollowTipsID: res.data.objects[0].myFollowTips
+      });
+      console.log(that.data.myFollowTipsID);
+    }, function (err) {
+      console.log(err);
+      wx.showToast({
+        title: '网络故障',
+        image: '../image/netError.png'
+      });
+    })
   },
 
   onMyFollowTipTabShow: function () {
@@ -175,7 +196,7 @@ Page({
     let tableId = app.globalData.tableID.tips;
     let query = new wx.BaaS.Query();
     query.compare('isVerified', '=', true);
-    
+
     let tableObject = this.createTableObject(tableId, query, 0);
     tableObject.find().then(res => {
       this.setData({
@@ -208,7 +229,7 @@ Page({
           }
           var tipData = that.data.tipData;
           var concatData = tipData.concat(res.data.objects);
-          that.setData({ tipData: concatData});
+          that.setData({ tipData: concatData });
           that.isTab1Loading = false;
         }, function (err) {
           console.log(err);
@@ -277,6 +298,82 @@ Page({
 
     })
   },
+  bindFollow: function(e){
+    console.log(e.currentTarget.dataset.tip);
+    let currentTip = e.currentTarget.dataset.tip;
+    wx.showLoading({
+      title: '正在关注',
+    });
+    let that = this;
+    let uid = wx.BaaS.storage.get('uid');
+    let myFollowTable = new wx.BaaS.TableObject(app.globalData.tableID.follow);
+    let followQuery = new wx.BaaS.Query();
+    followQuery.compare('created_by', '=', uid);
+    myFollowTable.setQuery(followQuery).find().then(function(res){
+      console.log(res);
+      let id = res.data.objects[0].id;
+      let myFollowTips = res.data.objects[0].myFollowTips;
+      if(res.data.objects.length == 0){
+        let newFollowTip = myFollowTable.create();
+        newFollowTip.set({ myFollowTips: [currentTip.id]});
+        newFollowTip.save().then(function(res){
+          wx.showToast({
+            title: '关注成功',
+          });
+          that.onShow();
+        }, function(err){
+          console.log(err);
+          wx.showToast({
+            title: '网络故障',
+            image: '../image/netError.png'
+          });
+        })
+      } else {
+        let index = myFollowTips.indexOf(currentTip.id);
+        let updateFollowTip = myFollowTable.getWithoutData(id);
+        if(index == -1){
+          myFollowTips.push(currentTip.id);
+          updateFollowTip.set({ myFollowTips: myFollowTips});
+          updateFollowTip.update().then(function(updateRes){
+            wx.showToast({
+              title: '关注成功',
+            });
+            that.setData({
+              btnWord: '取消关注',
+            });
+            that.onShow();
+          }, function(updateErr){
+            console.log(updateErr);
+            wx.showToast({
+              title: '网络故障',
+              image: '../image/netError.png'
+            });
+          })
+        } else {
+          myFollowTips.splice(index, index);
+          updateFollowTip.set({ myFollowTips: myFollowTips});
+          updateFollowTip.update().then(function (updateRes) {
+            wx.showToast({
+              title: '取消关注成功',
+              image: '../image/unfollow.png'
+            });
+            that.setData({
+              btnWord: '关注',
+            });
+            that.onShow();
+          }, function (updateErr) {
+            console.log(updateErr);
+            wx.showToast({
+              title: '网络故障',
+              image: '../image/netError.png'
+            });
+          })
+        }
+      }
+    }, function(err){
+
+    })
+  },
 
   // 创建TableObject对象
   // id: table ID
@@ -287,7 +384,7 @@ Page({
       pageNum = 0;
     }
     if (query == undefined) {
-        query = new wx.BaaS.Query();
+      query = new wx.BaaS.Query();
     }
     let limit = this.rowPerPage;
     let offset = pageNum * limit;
@@ -312,7 +409,7 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () { 
+  onPullDownRefresh: function () {
     var that = this;
     that.setData({ refreshing: true });
     if (that.data.currentTab == 0 && that.isTab1Loading == false) {
@@ -343,7 +440,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+
   },
   onScrollViewReachBottom: function () {
     if (this.data.currentTab == 0 && this.isTab1Loading == false) {

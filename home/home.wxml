@@ -12,6 +12,7 @@
 
     <swiper-item style="position:relative">
       <wxs src="time.wxs" module="time" />
+      <wxs src="followBtn.wxs" module="followBtn" />
       <scroll-view scroll-y bindscrolltolower="onScrollViewReachBottom" bindscrolltoupper="onScrollViewReachTop" lower-threshold="0">
         <block wx:if="{{tipData.length > 0}}" wx:for="{{tipData}}" wx:for-item="item" wx:for-index="index">
           <view class='tip-row' catchtap='showDetail' data-tip='{{item}}'>
@@ -33,7 +34,7 @@
               </view>
               
               <view class="tip-follow-btn-box">
-                <button class='tip-follow-btn' catchtap='catchFollow' data-tip='{{item}}'>关注</button>
+                <button class='tip-follow-btn' catchtap='bindFollow' data-tip='{{item}}'>{{followBtn.test(myFollowTipsID, item.id)}}</button>
               </view>
             </view>
 

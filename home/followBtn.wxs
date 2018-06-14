@@ -1,0 +1,8 @@
+module.exports.test = function(array, id){
+  var index = array.indexOf(id);
+  if(index == -1){
+    return '关注';
+  }else{
+    return '取消关注';
+  }
+}

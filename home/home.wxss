@@ -180,7 +180,7 @@ swiper-item{
   width: 50%;
 }
 .tip-follow-btn-box {
-  width: 50%;
+  width: 70%;
   text-align: right;
 }
 .tip-row-4 {
