@@ -38,6 +38,10 @@ Page({
     let that = this;
     this.updateSwiperHeight();
     this.fetchTipsAndShow();
+    wx.setNavigationBarColor({
+      frontColor: '#000000',
+      backgroundColor: '#ffffff',
+    });
   },
 
   swichNav: function (e) {

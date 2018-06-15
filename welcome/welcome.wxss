@@ -1,0 +1,53 @@
+/* welcome/welcome.wxss */
+page {
+  background-color: #fafafa;
+}
+.welcome-swiper {
+  width: 100%;
+}
+
+.welcome-view {
+  margin-top: 40%;
+  margin-left: 10%;
+}
+
+.welcome-title {
+  font-weight: lighter;
+  font-size: 20px;
+}
+
+.welcome-content {
+  padding-top: 48rpx;
+}
+
+.welcome-content-text {
+  margin-left: 50rpx;
+  margin-right: 50rpx;
+}
+
+.botton-view {
+  position: absolute;
+  bottom: 24%;
+  width: 100%;
+  text-align: center;
+}
+
+.swiper-page {
+  height: 45rpx;
+  width: 100%;
+  position: absolute;
+  bottom: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+.page-item {
+  height: 15rpx;
+  background-color: #d8d8d8;
+  width: 15rpx;
+  border-radius: 7.5rpx;
+  margin-left: 12rpx;
+}
+.on {
+  background-color: #444444;
+}

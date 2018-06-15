@@ -1,7 +1,8 @@
 {
   "window": {
+    "backgroundColor": "#fafafa",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#fafafa",
     "navigationBarTitleText": "周边Tips",
     "navigationBarTextStyle": "black"
   },
@@ -13,7 +14,8 @@
     "detail/detail",
     "tasksDetail/tasksDetail",
     "my/my",
-    "myTaskList/myTaskList"
+    "myTaskList/myTaskList",
+    "welcome/welcome"
   ],
   "tabBar": {
     "selectedColor": "#000",

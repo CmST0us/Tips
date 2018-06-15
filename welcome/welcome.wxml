@@ -1,0 +1,56 @@
+<!--welcome/welcome.wxml-->
+<swiper class='welcome-swiper' style='height:{{screenSafeHeight}}px' current='{{currentTab}}' bindchange="swiperChange">
+  <!--欢迎第一页  -->
+  <swiper-item>
+    <view class='welcome-view'>
+      <view class='welcome-title'>
+        <text>获取周边热点信息</text>
+      </view>
+      <view class='welcome-content'>
+          <view style='margin-bottom: 48rpx'>
+            <text class='welcome-content-text'>商场促销</text>
+            <text class='welcome-content-text'>演出活动</text>
+          </view>
+          <view style='margin-left: 38rpx'>
+            <text class='welcome-content-text'>出行交通</text>
+            <text class='welcome-content-text'>生活常识</text>
+          </view>
+      </view>
+    </view>
+  </swiper-item>
+
+  <!--欢迎第二页  -->
+  <swiper-item>
+    <view class='welcome-view'>
+      <view class='welcome-title'>
+        <text>分享你刚刚获得的消息</text>
+      </view>
+      <view class='welcome-content'>
+          <image mode="aspectFit" src="/image/tip-welcome.png"></image>
+      </view>
+    </view>
+  </swiper-item>
+
+  <!--欢迎第三页  -->
+  <swiper-item>
+    <view class='welcome-view'>
+      <view class='welcome-title'>
+        <text>自动回收失效的消息</text>
+      </view>
+      <view class='welcome-content'>
+          <text class='welcome-content-text'>怕白跑一趟？我们帮你验证</text>
+      </view>
+    </view>
+
+    <view class="botton-view">
+      <button class="start-button" open-type="getUserInfo" bindgetuserinfo="userInfoHandler" formType="submit" type="primary" size="mini">开始体验</button>
+    </view>
+    
+  </swiper-item>
+</swiper>
+
+<view class="swiper-page">
+    <view class="page-item {{currentTab==0 ? 'on' : ''}}" data-current="0"></view>
+    <view class="page-item {{currentTab==1 ? 'on' : ''}}" data-current="1"></view>
+    <view class="page-item {{currentTab==2 ? 'on' : ''}}" data-current="2"></view>
+</view>
