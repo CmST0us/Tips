@@ -147,13 +147,13 @@ swiper-item{
 }
 
 .tip-follow-btn {
-  margin-top: 8px;
-  margin-bottom: 8px;
-  margin-left: 100px;
-  padding-top: 2px;
-  padding-bottom: 2px;
+  margin-top: 8rpx;
+  margin-bottom: 8rpx;
+  margin-left: 100rpx;
+  padding-top: 2rpx;
+  padding-bottom: 2rpx;
   box-sizing: unset;
-  font-size: 14px;
+  font-size: 30rpx;
   text-align: center;
   text-decoration: none;
   line-height: unset;
@@ -180,7 +180,7 @@ swiper-item{
   width: 50%;
 }
 .tip-follow-btn-box {
-  width: 70%;
+  width: 45%;
   text-align: right;
 }
 .tip-row-4 {
