@@ -19,6 +19,7 @@
   font-weight: bold;  
   color: #dbdbdb;   
   width: 33%;
+  
 }  
 
 .swiper {  
@@ -209,13 +210,18 @@ map {
 .swiper-tab-container{
   display: flex;  
   flex-direction: row;
-  line-height: 80rpx;
-  
+  justify-content: center;
+  line-height: 70rpx;
+  overflow: hidden;
+  margin-bottom: 0rpx;
+}
+
+.iconView{
+  margin-left: 10rpx; 
+  width: 10%;
 }
 
 icon{
-  height: 10rpx;
-  
+  margin-top: 27rpx;
   margin-left: 10rpx;
-  width: 10%;
 }
