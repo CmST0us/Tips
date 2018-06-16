@@ -1,5 +1,5 @@
 <view class='searchView'>
-  <icon type='search'></icon>
+  <icon class="search-icon" type='search'></icon>
   <input placeholder='在此输入关键词' focus='true' confirm-type='search' bindinput='startSearch' bindconfirm='confirmSearch' class='searchInput'></input>
 </view>
 <view class='container'>

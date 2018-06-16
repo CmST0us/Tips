@@ -100,3 +100,7 @@ icon {
   text-align: center;
   margin-top: 80rpx;
 }
+
+.search-icon {
+  align-self: center;
+}

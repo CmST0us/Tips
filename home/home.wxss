@@ -7,7 +7,6 @@
 .swiper-tab {  
   display: flex;  
   flex-direction: row;    
-  border-bottom: 2rpx solid #dbdbdb; 
   width: 90%; 
   border-left: 1rpx solid #dbdbdb;
 }  
@@ -214,6 +213,7 @@ map {
   line-height: 70rpx;
   overflow: hidden;
   margin-bottom: 0rpx;
+  border-bottom: 2rpx solid #dbdbdb; 
 }
 
 .iconView{
@@ -221,7 +221,9 @@ map {
   width: 10%;
 }
 
-icon{
-  margin-top: 27rpx;
-  margin-left: 10rpx;
+.search-icon {
+  height: 23px;
+  width: 23px;
+  align-self: center;
+  margin-right: 5px;
 }

@@ -1,6 +1,6 @@
 <view class='container'>
   <view class='swiper-tab-container'>
-  <icon type='search' bindtap='showSearch'></icon>
+  <icon class="search-icon" type='search' bindtap='showSearch'></icon>
     <view class="swiper-tab">
       <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">附近的tips</view>
       <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
