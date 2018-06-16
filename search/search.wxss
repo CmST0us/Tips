@@ -1,25 +1,28 @@
 /* search/search.wxss */
 .container{
   padding: 0 40rpx;
-  background: #efefef;
+  background-color: #fff;
   padding-top: 20rpx;
 }
 
 .searchInput{
-  background-color: #dbdbdb;
+  background-color: #fff;
   width: 100%;
-  border-left: 1rpx solid black;
+  margin-left: 10rpx; 
 }
 
 .searchView{
   display: flex;
   flex-direction: row; 
   width: 100%;
+  border-bottom: 1rpx solid #dbdbdb;
 }
 
 icon{
   margin-left: 10rpx;
   margin-right: 10rpx; 
+  padding-right: 10rpx; 
+  border-right: 1rpx solid #dbdbdb;
 }
 
 .task-list-row {
