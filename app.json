@@ -15,7 +15,8 @@
     "tasksDetail/tasksDetail",
     "my/my",
     "myTaskList/myTaskList",
-    "welcome/welcome"
+    "welcome/welcome",
+    "search/search"
   ],
   "tabBar": {
     "selectedColor": "#000",
