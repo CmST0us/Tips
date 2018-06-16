@@ -1,20 +1,25 @@
 /* search/search.wxss */
-page{
+
+page {
   background-color: #dbdbdb;
 }
-.container{
+
+.container {
   padding: 0 40rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.searchInput{
+.searchInput {
   background-color: #fff;
   width: 100%;
-  margin-left: 10rpx; 
+  margin-left: 10rpx;
 }
 
-.searchView{
+.searchView {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   width: 100%;
   padding-top: 10rpx;
   padding-bottom: 10rpx;
@@ -22,10 +27,10 @@ page{
   background-color: white;
 }
 
-icon{
+icon {
   margin-left: 10rpx;
-  margin-right: 10rpx; 
-  padding-right: 10rpx; 
+  margin-right: 10rpx;
+  padding-right: 10rpx;
   border-right: 1rpx solid #dbdbdb;
 }
 
@@ -79,4 +84,19 @@ icon{
 .task-list-type {
   font-size: 14px;
   color: #000;
+}
+
+.noResultText {
+  color: #a2a2a2;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.noResult {
+  position: absolute;
+  left: 0rpx;
+  top: 20rpx;
+  width: 100%;
+  text-align: center;
+  margin-top: 80rpx;
 }

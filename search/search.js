@@ -7,6 +7,8 @@ Page({
    */
   data: {
     searchData: [],
+    isSearchValid: false,
+    isSearch: false
   },
 
   /**
@@ -71,12 +73,14 @@ Page({
       this.search(keyWord);
     } else {
       this.setData({
-        searchData: []
+        searchData: [],
+        isSearch: false
       });
     }
   },
   search: function (keyWord) {
     let that = this;
+    that.setData({isSearch: true});
     let keyWordQuery = new wx.BaaS.Query();
     keyWordQuery.contains('content', keyWord);
     let locationQuery = new wx.BaaS.Query();
@@ -87,11 +91,13 @@ Page({
     tipsTableObject.setQuery(orQuery).find().then(function (res) {
       if (res.data.objects.length != 0) {
         that.setData({
-          searchData: res.data.objects
+          searchData: res.data.objects,
+          isSearchValid: true
         });
       } else {
         that.setData({
-          searchData: []
+          searchData: [],
+          isSearchValid: false
         });
       }
     }, function (err) {
@@ -109,4 +115,8 @@ Page({
       url: '../detail/detail?page=' + 'home'
     });
   },
+  confirmSearch: function(e){
+    let keyWord = e.detail.value;
+    this.search(keyWord);
+  }
 })
