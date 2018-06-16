@@ -6,9 +6,10 @@
   
 .swiper-tab {  
   display: flex;  
-  flex-direction: row;  
-  line-height: 80rpx;  
-  border-bottom: 2rpx solid #dbdbdb;  
+  flex-direction: row;    
+  border-bottom: 2rpx solid #dbdbdb; 
+  width: 90%; 
+  border-left: 1rpx solid #dbdbdb;
 }  
   
 .tab-item {  
@@ -17,6 +18,8 @@
   font-size: 16px;
   font-weight: bold;  
   color: #dbdbdb;   
+  width: 33%;
+  
 }  
 
 .swiper {  
@@ -147,13 +150,13 @@ swiper-item{
 }
 
 .tip-follow-btn {
-  margin-top: 8px;
-  margin-bottom: 8px;
-  margin-left: 100px;
-  padding-top: 2px;
-  padding-bottom: 2px;
+  margin-top: 8rpx;
+  margin-bottom: 8rpx;
+  margin-left: 100rpx;
+  padding-top: 2rpx;
+  padding-bottom: 2rpx;
   box-sizing: unset;
-  font-size: 14px;
+  font-size: 30rpx;
   text-align: center;
   text-decoration: none;
   line-height: unset;
@@ -180,7 +183,7 @@ swiper-item{
   width: 50%;
 }
 .tip-follow-btn-box {
-  width: 70%;
+  width: 45%;
   text-align: right;
 }
 .tip-row-4 {
@@ -202,4 +205,23 @@ video {
 }
 map {
   width: 100%;
+}
+
+.swiper-tab-container{
+  display: flex;  
+  flex-direction: row;
+  justify-content: center;
+  line-height: 70rpx;
+  overflow: hidden;
+  margin-bottom: 0rpx;
+}
+
+.iconView{
+  margin-left: 10rpx; 
+  width: 10%;
+}
+
+icon{
+  margin-top: 27rpx;
+  margin-left: 10rpx;
 }

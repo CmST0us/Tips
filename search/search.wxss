@@ -1,0 +1,102 @@
+/* search/search.wxss */
+
+page {
+  background-color: #dbdbdb;
+}
+
+.container {
+  padding: 0 40rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.searchInput {
+  background-color: #fff;
+  width: 100%;
+  margin-left: 10rpx;
+}
+
+.searchView {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 1rpx solid white;
+  background-color: white;
+}
+
+icon {
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  padding-right: 10rpx;
+  border-right: 1rpx solid #dbdbdb;
+}
+
+.task-list-row {
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background: #fff;
+  border: 1rpx solid #ddd;
+  margin: 18rpx 0;
+  position: relative;
+}
+
+.tipContent {
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  width: 50%;
+}
+
+.locationView {
+  position: absolute;
+  right: 20rpx;
+  top: 80rpx;
+}
+
+.locationText {
+  color: #a2a2a2;
+  font-weight: bold;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  width: 50%;
+}
+
+.participatorsNumView {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+}
+
+.numText {
+  color: #a2a2a2;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.task-list-type {
+  font-size: 14px;
+  color: #000;
+}
+
+.noResultText {
+  color: #a2a2a2;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.noResult {
+  position: absolute;
+  left: 0rpx;
+  top: 20rpx;
+  width: 100%;
+  text-align: center;
+  margin-top: 80rpx;
+}

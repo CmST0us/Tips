@@ -1,0 +1,25 @@
+<view class='searchView'>
+  <icon type='search'></icon>
+  <input placeholder='在此输入关键词' focus='true' confirm-type='search' bindinput='startSearch' bindconfirm='confirmSearch' class='searchInput'></input>
+</view>
+<view class='container'>
+  <view class='noResult'>
+    <text class='noResultText' wx:if='{{isSearch && !isSearchValid}}'>没有查询到与关键词有关的Tips哦</text>
+  </view>
+  <scroll-view class='resultView'>
+    <block class='searchItem' wx:for='{{searchData}}'>
+      <view class="task-list-row" bindtap='showDetail' data-tip='{{item}}'>
+        <text class='tipContent'>{{item.content}}</text>
+        <view class="task-list-footer">
+          <text class='task-list-type'>{{item.tipType}}</text>
+        </view>
+        <view class='participatorsNumView'>
+          <text class='numText'>申请人数：{{item.participantID.length}}人</text>
+        </view>
+        <view class='locationView'>
+          <text class='locationText'>地址：{{item.locationName}}</text>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>
