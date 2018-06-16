@@ -6,9 +6,10 @@
   
 .swiper-tab {  
   display: flex;  
-  flex-direction: row;  
-  line-height: 80rpx;  
-  border-bottom: 2rpx solid #dbdbdb;  
+  flex-direction: row;    
+  border-bottom: 2rpx solid #dbdbdb; 
+  width: 90%; 
+  border-left: 1rpx solid #dbdbdb;
 }  
   
 .tab-item {  
@@ -17,6 +18,7 @@
   font-size: 16px;
   font-weight: bold;  
   color: #dbdbdb;   
+  width: 33%;
 }  
 
 .swiper {  
@@ -202,4 +204,18 @@ video {
 }
 map {
   width: 100%;
+}
+
+.swiper-tab-container{
+  display: flex;  
+  flex-direction: row;
+  line-height: 80rpx;
+  
+}
+
+icon{
+  height: 10rpx;
+  
+  margin-left: 10rpx;
+  width: 10%;
 }

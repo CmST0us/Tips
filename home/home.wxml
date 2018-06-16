@@ -1,13 +1,14 @@
 <view class='container'>
-  <view class="swiper-tab">
-    <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">附近的tips</view>
-    <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
-      我的关注</view>
-    <view class="tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">随机推荐
+  <view class='swiper-tab-container'>
+  <icon type='search' bindtap='showSearch'></icon>
+    <view class="swiper-tab">
+      <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">附近的tips</view>
+      <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
+        我的关注</view>
+      <view class="tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">随机推荐
+      </view>
     </view>
-
   </view>
-
   <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{listSafeAreaHeight}}px'>
 
     <swiper-item style="position:relative">
@@ -32,7 +33,7 @@
                 <text class='tip-type'>{{item.tipType}} </text>
                 <text class='tip-time'>{{time.parse(item.created_at)}}</text>
               </view>
-              
+
               <view class="tip-follow-btn-box">
                 <button class='tip-follow-btn' catchtap='bindFollow' data-tip='{{item}}'>{{followBtn.test(myFollowTipsID, item.id)}}</button>
               </view>
@@ -44,13 +45,13 @@
 
       <block wx:if="{{tipData.length == 0}}">
         <view class="no-tip-notify">
-        <text class="no-tip-notify-text">这附近还没有tips，您可以自行创建</text>
+          <text class="no-tip-notify-text">这附近还没有tips，您可以自行创建</text>
         </view>
       </block>
 
     </swiper-item>
 
-<swiper-item style="position:relative">
+    <swiper-item style="position:relative">
       <wxs src="time.wxs" module="time" />
       <scroll-view scroll-y bindscrolltolower="onScrollViewReachBottom" bindscrolltoupper="onScrollViewReachTop" lower-threshold="0">
         <block wx:if="{{myFollowData.length > 0}}" wx:for="{{myFollowData}}" wx:for-item="item" wx:for-index="index">
@@ -79,11 +80,11 @@
 
       <block wx:if="{{myFollowData.length == 0}}">
         <view class="no-tip-notify">
-        <text class="no-tip-notify-text">这附近还没有tips，您可以自行创建</text>
+          <text class="no-tip-notify-text">这附近还没有tips，您可以自行创建</text>
         </view>
       </block>
     </swiper-item>
- 
+
     <swiper-item style="position:relative">
       <wxs src="time.wxs" module="time" />
       <scroll-view scroll-y bindscrolltolower="onScrollViewReachBottom" bindscrolltoupper="onScrollViewReachTop" lower-threshold="0">
@@ -105,7 +106,7 @@
                 <text class='tip-type'>{{item.tipType}} </text>
                 <text class='tip-time'>{{time.parse(item.created_at)}}</text>
               </view>
-              
+
             </view>
 
           </view>
@@ -114,7 +115,7 @@
 
       <block wx:if="{{recommendTipData.length == 0}}">
         <view class="no-tip-notify">
-        <text class="no-tip-notify-text">这附近还没有tips，您可以自行创建</text>
+          <text class="no-tip-notify-text">这附近还没有tips，您可以自行创建</text>
         </view>
       </block>
     </swiper-item>

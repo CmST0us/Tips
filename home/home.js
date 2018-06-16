@@ -479,5 +479,10 @@ Page({
     }, res => {
       console.log(res);
     })
+  },
+  showSearch: function(e){
+    wx.navigateTo({
+      url: '../search/search',
+    });
   }
 })
