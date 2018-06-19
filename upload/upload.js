@@ -67,7 +67,6 @@ Page({
             that.setData({ position: position });
           }
         });
-
       },
     })
   },
@@ -274,7 +273,8 @@ Page({
       videoPath: '',
       picUrls: [],
       isPicSelected: false,
-      isVideoSelected: false
+      isVideoSelected: false,
+      pickerIndex: 0
     });
   },
   bindChooseLocation: function (e) {
