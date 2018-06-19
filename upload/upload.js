@@ -272,6 +272,7 @@ Page({
       videoSrc: '',
       picPath: '',
       videoPath: '',
+      picUrls: [],
       isPicSelected: false,
       isVideoSelected: false
     });
