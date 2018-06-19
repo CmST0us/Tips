@@ -2,7 +2,7 @@
 module.exports.parse = function(iostime) {
   var time = getDate(iostime * 1000);
   var year = time.getFullYear() + '.';
-  var month = time.getMonth() + '.';
+  var month = (time.getMonth() + 1) + '.';
   var days = time.getDate();
   iostime = year + month + days;
   return iostime;
